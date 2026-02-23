@@ -1,7 +1,9 @@
 'use client';
 
+import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { ArrowRight } from 'lucide-react';
@@ -97,6 +99,53 @@ const BLOG_POSTS = [
     thumbIcon: '🏡',
   },
 ];
+
+/* ── Testimonialカード（スクロールパララックス） ── */
+function TestimonialCards() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+
+  const y0 = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const y1 = useTransform(scrollYProgress, [0, 1], [20, -60]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [60, -20]);
+  const yValues = [y0, y1, y2];
+
+  const directions = [
+    { initial: { x: -60, opacity: 0 }, whileInView: { x: 0, opacity: 1 } },
+    { initial: { y:  60, opacity: 0 }, whileInView: { y: 0, opacity: 1 } },
+    { initial: { x:  60, opacity: 0 }, whileInView: { x: 0, opacity: 1 } },
+  ];
+
+  return (
+    <div ref={ref} className="testimonial-grid" style={{ position: 'relative' }}>
+      {TESTIMONIALS.map((t, i) => (
+        <motion.div
+          key={t.name}
+          className="testimonial-card"
+          style={{ y: yValues[i] }}
+          initial={directions[i].initial}
+          whileInView={directions[i].whileInView}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+        >
+          <span className="testimonial-card__quote-mark">&ldquo;</span>
+          <p className="testimonial-card__text">{t.text}</p>
+          <div className="testimonial-card__author">
+            <div className="testimonial-card__avatar">{t.initial}</div>
+            <div>
+              <p className="testimonial-card__name">{t.name}</p>
+              <p className="testimonial-card__meta">{t.meta}</p>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 /* ── ページ ───────────────────────────────────── */
 export default function HomePage() {
@@ -318,28 +367,12 @@ export default function HomePage() {
       </section>
 
       {/* ── Testimonials ──────────────────────── */}
-      <section className="section section--warm">
+      <section className="section section--warm" id="testimonials-section">
         <div className="container">
           <FadeIn>
             <SectionHeading en="Customer Voices" jp="お客様の声" center />
           </FadeIn>
-          <div className="testimonial-grid">
-            {TESTIMONIALS.map((t, i) => (
-              <FadeIn key={t.name} delay={i * 100}>
-                <div className="testimonial-card">
-                  <span className="testimonial-card__quote-mark">&ldquo;</span>
-                  <p className="testimonial-card__text">{t.text}</p>
-                  <div className="testimonial-card__author">
-                    <div className="testimonial-card__avatar">{t.initial}</div>
-                    <div>
-                      <p className="testimonial-card__name">{t.name}</p>
-                      <p className="testimonial-card__meta">{t.meta}</p>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          <TestimonialCards />
           <FadeIn delay={300}>
             <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
               <Link href="/results" className="btn btn--outline">
