@@ -296,12 +296,23 @@ export default function HomePage() {
           <div className="profile-section">
             <FadeIn delay={100}>
               <div className="profile-img-wrap">
-                <div className="profile-img" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem', borderRadius: '1.5rem', overflow: 'hidden', position: 'relative' }}>
+                <div style={{
+                  width: '100%',
+                  maxWidth: '280px',
+                  aspectRatio: '3/4',
+                  borderRadius: '1.5rem',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  background: 'var(--col-warm)',
+                }}>
                   <Image
                     src="/images/DSC3587-1024x683.jpg"
                     alt="渡辺加奈子"
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center top',
+                    }}
                   />
                 </div>
                 <span className="profile-img-badge">FP×キャリア</span>
