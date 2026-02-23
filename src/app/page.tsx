@@ -269,7 +269,7 @@ export default function HomePage() {
           <FadeIn>
             <SectionHeading
               en="Why it matters"
-              jp="お金とキャリアを\n一緒に考える理由"
+              jp="お金とキャリアを一緒に考える理由"
               center
             />
           </FadeIn>
