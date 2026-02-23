@@ -1,42 +1,35 @@
 'use client';
+
 import { useEffect, useRef, ReactNode } from 'react';
 
-interface FadeInProps {
+interface Props {
   children: ReactNode;
   delay?: number;
   className?: string;
 }
 
-export default function FadeIn({ children, delay = 0, className = '' }: FadeInProps) {
+export default function FadeIn({ children, delay = 0, className = '' }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
+    const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-          }, delay);
-          observer.unobserve(el);
+          setTimeout(() => el.classList.add('visible'), delay);
+          obs.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
-
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(28px)';
-    el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
-
-    observer.observe(el);
-    return () => observer.disconnect();
+    obs.observe(el);
+    return () => obs.disconnect();
   }, [delay]);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={`fade-in ${className}`}>
       {children}
     </div>
   );
