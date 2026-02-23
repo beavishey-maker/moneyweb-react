@@ -22,13 +22,29 @@ const WORRY_CATS = [
 ];
 
 export default function ContactPage() {
-  const [agreed, setAgreed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Netlify Forms はデプロイ後に実際に動作します
-    setSubmitted(true);
+    setIsLoading(true);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error('送信エラー:', err);
+      alert('送信に失敗しました。時間をおいてお試しください。');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -64,107 +80,126 @@ export default function ContactPage() {
               {/* フォーム */}
               <div>
                 {submitted ? (
-                  <div style={{ textAlign: 'center', padding: '3rem 0' }}>
-                    <p style={{ fontSize: '2rem', marginBottom: '1rem' }}>✅</p>
-                    <h2 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.3rem', color: 'var(--color-dark)', marginBottom: '0.75rem' }}>
-                      お問い合わせを受け付けました
-                    </h2>
-                    <p style={{ fontSize: '0.875rem', color: 'var(--color-dark)', opacity: 0.7, lineHeight: 1.9 }}>
-                      2〜3営業日以内にご連絡いたします。<br />
-                      しばらくお待ちください。
+                  <div className="form-success">
+                    <p className="form-success__emoji">✅</p>
+                    <h3 className="form-success__title">送信が完了しました！</h3>
+                    <p className="form-success__text">
+                      2〜3営業日以内にメールにてご連絡いたします。<br />
+                      迷惑メールフォルダもご確認ください。
                     </p>
+                    <a href="/" className="btn btn-outline" style={{ marginTop: '1.5rem' }}>
+                      トップページへ戻る
+                    </a>
                   </div>
                 ) : (
                   <form
                     name="contact"
                     method="POST"
-                    data-netlify="true"
-                    className="contact-form"
                     onSubmit={handleSubmit}
+                    className="contact-form"
                   >
                     <input type="hidden" name="form-name" value="contact" />
 
+                    {/* お名前 */}
                     <div className="form-group">
-                      <label className="form-label">
-                        お名前<span className="req">必須</span>
+                      <label className="form-label" htmlFor="name">
+                        お名前 <span className="form-required">必須</span>
                       </label>
-                      <input type="text" name="name" className="form-input" placeholder="山田 花子" required />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">
-                        メールアドレス<span className="req">必須</span>
-                      </label>
-                      <input type="email" name="email" className="form-input" placeholder="example@email.com" required />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">年代</label>
-                      <div className="form-radio-group">
-                        {['30代', '40代', '50代', '60代以上'].map(age => (
-                          <label key={age} className="form-radio-label">
-                            <input type="radio" name="age" value={age} />
-                            {age}
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">お悩みのカテゴリ（複数選択可）</label>
-                      <div className="form-check-group">
-                        {WORRY_CATS.map(cat => (
-                          <label key={cat} className="form-check-label">
-                            <input type="checkbox" name="category" value={cat} />
-                            {cat}
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">ご相談内容（任意）</label>
-                      <textarea
-                        name="message"
-                        className="form-textarea"
-                        placeholder="「なんとなく不安」「何から始めればいい？」など、どんな内容でも構いません。"
-                        rows={5}
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        className="form-input"
+                        placeholder="例：渡辺 加奈子"
                       />
                     </div>
 
+                    {/* メールアドレス */}
                     <div className="form-group">
-                      <label className="form-label">希望連絡方法</label>
+                      <label className="form-label" htmlFor="email">
+                        メールアドレス <span className="form-required">必須</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        className="form-input"
+                        placeholder="例：kanako@example.com"
+                      />
+                    </div>
+
+                    {/* 年代 */}
+                    <div className="form-group">
+                      <p className="form-label">年代</p>
                       <div className="form-radio-group">
-                        {['メール', 'ビデオ通話（Zoom）'].map(method => (
-                          <label key={method} className="form-radio-label">
-                            <input type="radio" name="contact_method" value={method} />
-                            {method}
+                        {['30代', '40代', '50代', '60代以上'].map((age) => (
+                          <label key={age} className="form-radio-label">
+                            <input type="radio" name="age" value={age} />
+                            <span>{age}</span>
                           </label>
                         ))}
                       </div>
                     </div>
 
+                    {/* お悩みカテゴリ */}
                     <div className="form-group">
-                      <label className="form-agree-label">
-                        <input
-                          type="checkbox"
-                          required
-                          checked={agreed}
-                          onChange={e => setAgreed(e.target.checked)}
-                        />
+                      <p className="form-label">お悩みカテゴリ（複数選択可）</p>
+                      <div className="form-check-group">
+                        {WORRY_CATS.map((cat) => (
+                          <label key={cat} className="form-check-label">
+                            <input type="checkbox" name="category" value={cat} />
+                            <span>{cat}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* ご相談内容 */}
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="message">
+                        ご相談内容 <span className="form-optional">任意</span>
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        className="form-textarea"
+                        rows={5}
+                        placeholder="どんな些細なことでもお気軽にどうぞ。"
+                      />
+                    </div>
+
+                    {/* 希望連絡方法 */}
+                    <div className="form-group">
+                      <p className="form-label">ご希望の連絡方法</p>
+                      <div className="form-radio-group">
+                        {['メール', 'ビデオ通話（Zoom等）'].map((method) => (
+                          <label key={method} className="form-radio-label">
+                            <input type="radio" name="contact-method" value={method} />
+                            <span>{method}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 同意チェック */}
+                    <div className="form-group">
+                      <label className="form-check-label">
+                        <input type="checkbox" name="privacy" required />
                         <span>
-                          <a href="/privacy" style={{ color: 'var(--color-primary)' }}>プライバシーポリシー</a>に同意する
-                          <span className="req" style={{ marginLeft: '0.4rem' }}>必須</span>
+                          <a href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>
+                          に同意します（必須）
                         </span>
                       </label>
                     </div>
 
                     <button
                       type="submit"
-                      className="form-submit-btn"
-                      disabled={!agreed}
+                      className="btn btn-primary btn--lg form-submit"
+                      disabled={isLoading}
                     >
-                      送信する
+                      {isLoading ? '送信中...' : '送信する'}
                     </button>
                   </form>
                 )}
