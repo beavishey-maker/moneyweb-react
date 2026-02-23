@@ -86,7 +86,7 @@ export default function ResultsPage() {
       </div>
 
       {/* 声グリッド */}
-      <section className="section section--white">
+      <section className="section section--warm">
         <div className="container">
           <FadeIn>
             <SectionHeading label="Voices" title="ご相談者さまの声" desc="すべて実際のご相談者さまより許可を得て掲載しています。" />

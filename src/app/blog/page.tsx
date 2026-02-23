@@ -53,7 +53,7 @@ export default function BlogPage() {
         <p className="page-hero__desc">お金・キャリア・暮らしについて、等身大で綴っています</p>
       </div>
 
-      <section className="section section--white">
+      <section className="section section--warm">
         <div className="container">
           <FadeIn>
             <SectionHeading label="Contents" title="お役立ちコンテンツ" />

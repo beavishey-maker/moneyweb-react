@@ -135,18 +135,20 @@ export default function HomePage() {
       </section>
 
       {/* ── Stats ─────────────────────────────── */}
-      <FadeIn>
-        <div className="stats-grid">
-          {STATS.map((s) => (
-            <div key={s.label} className="stats-item">
-              <div className="stats-item__num">
-                {s.num}<span>{s.unit}</span>
+      <div className="stats-section">
+        <FadeIn>
+          <div className="stats-grid">
+            {STATS.map((s) => (
+              <div key={s.label} className="stats-item">
+                <div className="stats-item__num">
+                  {s.num}<span>{s.unit}</span>
+                </div>
+                <div className="stats-item__label">{s.label}</div>
               </div>
-              <div className="stats-item__label">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </FadeIn>
+            ))}
+          </div>
+        </FadeIn>
+      </div>
 
       {/* ── Empathy ───────────────────────────── */}
       <section className="section">
@@ -301,7 +303,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Testimonials ──────────────────────── */}
-      <section className="section">
+      <section className="section section--warm">
         <div className="container">
           <FadeIn>
             <SectionHeading en="Customer Voices" jp="お客様の声" center />
