@@ -78,9 +78,24 @@ const STATS = [
 ];
 
 const BLOG_POSTS = [
-  { cat: '家計管理', catColor: '#B8975A', title: '40代女性の貯蓄割合はどれくらい？今すぐできる見直し3ステップ', date: '2025.12.15' },
-  { cat: 'キャリア', catColor: '#1A1A1A', title: '扶養内パートと扶養外、どちらが得？年収別シミュレーション', date: '2025.12.08' },
-  { cat: '老後・年金', catColor: '#B8975A', title: '40代専業主婦でもiDeCoは始めるべき？メリットと注意点', date: '2025.11.28' },
+  {
+    cat: '家計管理', catColor: '#B8975A',
+    title: '40代女性の貯蓄割合はどれくらい？今すぐできる見直し3ステップ', date: '2025.12.15',
+    thumbGrad: 'linear-gradient(135deg, #F7EDD8 0%, #EDD9A8 50%, #E2C882 100%)',
+    thumbIcon: '💰',
+  },
+  {
+    cat: 'キャリア', catColor: '#1A1A1A',
+    title: '扶養内パートと扶養外、どちらが得？年収別シミュレーション', date: '2025.12.08',
+    thumbGrad: 'linear-gradient(135deg, #E6EDE4 0%, #C5D9BB 50%, #A8C49A 100%)',
+    thumbIcon: '🌿',
+  },
+  {
+    cat: '老後・年金', catColor: '#B8975A',
+    title: '40代専業主婦でもiDeCoは始めるべき？メリットと注意点', date: '2025.11.28',
+    thumbGrad: 'linear-gradient(135deg, #E4EBF2 0%, #BBC9DA 50%, #96AFCA 100%)',
+    thumbIcon: '🏡',
+  },
 ];
 
 /* ── ページ ───────────────────────────────────── */
@@ -371,8 +386,8 @@ export default function HomePage() {
             {BLOG_POSTS.map((post, i) => (
               <FadeIn key={post.title} delay={i * 100}>
                 <article className="blog-card">
-                  <div className="blog-card__thumb">
-                    <span style={{ opacity: 0.3, fontSize: '2.5rem' }}>📝</span>
+                  <div className="blog-card__thumb" style={{ background: post.thumbGrad }}>
+                    <span style={{ fontSize: '3.5rem', filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.15))' }}>{post.thumbIcon}</span>
                   </div>
                   <div className="blog-card__body">
                     <span
