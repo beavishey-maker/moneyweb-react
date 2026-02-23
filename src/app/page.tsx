@@ -126,7 +126,7 @@ export default function HomePage() {
               src="/images/DSC3587-1024x683.jpg"
               alt="渡辺加奈子"
               fill
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'cover', objectPosition: '30% center' }}
               priority
             />
           </div>
