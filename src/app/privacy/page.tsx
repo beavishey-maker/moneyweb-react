@@ -42,7 +42,7 @@ export default function PrivacyPage() {
               <p>本ポリシーは、必要に応じて変更する場合があります。変更後のポリシーは本ページに掲載します。</p>
 
               <h2>お問い合わせ先</h2>
-              <p>プライバシーポリシーに関するお問い合わせは、<a href="/contact" style={{ color: 'var(--color-primary)' }}>お問い合わせフォーム</a>よりご連絡ください。</p>
+              <p>プライバシーポリシーに関するお問い合わせは、<a href="/contact" style={{ color: 'var(--col-gold)' }}>お問い合わせフォーム</a>よりご連絡ください。</p>
 
               <p style={{ marginTop: '2rem', fontSize: '0.8rem', opacity: 0.5 }}>制定日：2024年1月1日</p>
             </div>

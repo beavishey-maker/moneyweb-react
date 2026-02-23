@@ -22,7 +22,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <Header />
-        {children}
+        <main style={{ paddingTop: '80px' }}>
+          {children}
+        </main>
         <Footer />
         <FloatingCTA />
       </body>

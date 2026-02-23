@@ -155,18 +155,22 @@ export default function ResultsPage() {
       </section>
 
       {/* CTA */}
-      <section className="cta-section">
-        <FadeIn>
-          <span className="cta-section__eyebrow">Your Turn</span>
-          <h2 className="cta-section__title">次は、あなたの番です。</h2>
-          <p className="cta-section__body">
-            同じように悩んでいた方々が、一歩を踏み出しました。<br />
-            あなたの「変化」も、必ず起こせます。
-          </p>
-          <div className="cta-section__btns">
-            <Link href="/contact" className="btn btn-primary btn--lg">無料相談を予約する</Link>
+      <section className="section--dark">
+        <div className="container">
+          <div className="cta-section">
+            <FadeIn>
+              <span className="cta-section__eyebrow" style={{ color: 'var(--col-gold)' }}>Your Turn</span>
+              <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>次は、あなたの番です。</h2>
+              <p className="cta-section__body" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                同じように悩んでいた方々が、一歩を踏み出しました。<br />
+                あなたの「変化」も、必ず起こせます。
+              </p>
+              <div className="cta-section__btns">
+                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を予約する</Link>
+              </div>
+            </FadeIn>
           </div>
-        </FadeIn>
+        </div>
       </section>
     </>
   );

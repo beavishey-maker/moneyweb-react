@@ -66,8 +66,7 @@ export default function BlogPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCat(cat)}
-                  className={`glossary-cat__btn${activeCat === cat ? ' active' : ''}`}
-                  style={{ fontSize: '0.85rem', padding: '0.4rem 1.1rem' }}
+                  className={`blog-filter-btn${activeCat === cat ? ' active' : ''}`}
                 >
                   {cat}
                 </button>
@@ -106,18 +105,22 @@ export default function BlogPage() {
       </section>
 
       {/* CTA */}
-      <section className="cta-section">
-        <FadeIn>
-          <span className="cta-section__eyebrow">Free Consultation</span>
-          <h2 className="cta-section__title">記事を読んで、気になったことがあれば</h2>
-          <p className="cta-section__body">
-            「これって私のこと？」と思ったら、ぜひ相談してください。<br />
-            初回60分は無料です。
-          </p>
-          <div className="cta-section__btns">
-            <Link href="/contact" className="btn btn-primary btn--lg">無料相談を予約する</Link>
+      <section className="section--dark">
+        <div className="container">
+          <div className="cta-section">
+            <FadeIn>
+              <span className="cta-section__eyebrow" style={{ color: 'var(--col-gold)' }}>Free Consultation</span>
+              <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>記事を読んで、気になったことがあれば</h2>
+              <p className="cta-section__body" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                「これって私のこと？」と思ったら、ぜひ相談してください。<br />
+                初回60分は無料です。
+              </p>
+              <div className="cta-section__btns">
+                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を予約する</Link>
+              </div>
+            </FadeIn>
           </div>
-        </FadeIn>
+        </div>
       </section>
     </>
   );

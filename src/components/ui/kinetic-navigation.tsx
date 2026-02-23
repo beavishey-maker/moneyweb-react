@@ -59,7 +59,7 @@ export function KineticNavigation({ items, isOpen, onClose }: KineticNavigationP
         {/* ヘッダー */}
         <div className="kinetic-header">
           <span className="kinetic-logo">
-            money <span style={{ color: 'var(--col-terra)' }}>web</span>
+            money <span style={{ color: 'var(--col-gold)' }}>web</span>
           </span>
           <button className="kinetic-close" onClick={onClose} aria-label="メニューを閉じる">
             <span style={{ fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.2em', fontSize: '0.8rem' }}>

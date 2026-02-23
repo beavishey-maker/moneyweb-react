@@ -73,10 +73,10 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="profile-strip__body">
-                <h2 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-dark)', marginBottom: '0.3rem' }}>
+                <h2 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.6rem', fontWeight: 400, color: 'var(--col-body)', marginBottom: '0.3rem' }}>
                   渡辺 加奈子
                 </h2>
-                <p style={{ color: 'var(--color-primary)', fontSize: '0.85rem', marginBottom: '1.5rem', letterSpacing: '0.05em' }}>
+                <p style={{ color: 'var(--col-gold)', fontSize: '0.85rem', marginBottom: '1.5rem', letterSpacing: '0.05em' }}>
                   FP &amp; 国家資格キャリアコンサルタント / 伴走プランナー
                 </p>
                 <p>40代・子育て中の働く母として、医療事務のキャリアを持ちながら、FP・キャリアコンサルタントとして活動しています。</p>
@@ -141,23 +141,23 @@ export default function AboutPage() {
           </FadeIn>
           <FadeIn delay={100}>
             <div className="fit-grid">
-              <div className="fit-card">
+              <div className="fit-card fit-card--yes">
                 <h3 className="fit-card__title">✅ こんな方におすすめです</h3>
                 <ul className="fit-card__list">
                   {FIT_YES.map((item, i) => (
                     <li key={i} className="fit-card__item">
-                      <span style={{ color: '#5E8063', flexShrink: 0 }}>◎</span>
+                      <span style={{ color: 'var(--col-gold)', flexShrink: 0 }}>◎</span>
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="fit-card">
+              <div className="fit-card fit-card--no">
                 <h3 className="fit-card__title">❌ 向いていない方</h3>
                 <ul className="fit-card__list">
                   {FIT_NO.map((item, i) => (
                     <li key={i} className="fit-card__item">
-                      <span style={{ color: 'rgba(61,43,31,0.4)', flexShrink: 0 }}>×</span>
+                      <span style={{ color: 'var(--col-muted)', flexShrink: 0 }}>×</span>
                       {item}
                     </li>
                   ))}
@@ -169,20 +169,24 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="cta-section">
-        <FadeIn>
-          <span className="cta-section__eyebrow">Free Consultation</span>
-          <h2 className="cta-section__title">まずは、話してみませんか？</h2>
-          <p className="cta-section__body">
-            どんな小さなモヤモヤでも、構いません。<br />
-            「相談するほどじゃない」なんてことは、ありません。<br />
-            あなたのペースで、お話しください。
-          </p>
-          <div className="cta-section__btns">
-            <Link href="/contact" className="btn btn-primary btn--lg">無料相談を予約する</Link>
-            <Link href="/services" className="btn btn-outline btn--lg" style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>サービス一覧を見る</Link>
+      <section className="section--dark">
+        <div className="container">
+          <div className="cta-section">
+            <FadeIn>
+              <span className="cta-section__eyebrow" style={{ color: 'var(--col-gold)' }}>Free Consultation</span>
+              <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>まずは、話してみませんか？</h2>
+              <p className="cta-section__body" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                どんな小さなモヤモヤでも、構いません。<br />
+                「相談するほどじゃない」なんてことは、ありません。<br />
+                あなたのペースで、お話しください。
+              </p>
+              <div className="cta-section__btns">
+                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を予約する</Link>
+                <Link href="/services" className="btn btn--outline btn--lg" style={{ color: 'rgba(255,255,255,0.7)', borderColor: 'rgba(255,255,255,0.2)' }}>サービス一覧を見る</Link>
+              </div>
+            </FadeIn>
           </div>
-        </FadeIn>
+        </div>
       </section>
     </>
   );

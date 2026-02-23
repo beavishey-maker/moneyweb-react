@@ -9,7 +9,7 @@ export default function Footer() {
           {/* ブランド */}
           <div>
             <div className="footer-brand__logo">
-              money <span style={{ color: 'var(--col-terra)' }}>web</span>
+              money <span style={{ color: 'var(--col-gold)' }}>web</span>
             </div>
             <p className="footer-brand__tagline">お金とキャリアの伴走プランナー</p>
             <p className="footer-brand__desc">

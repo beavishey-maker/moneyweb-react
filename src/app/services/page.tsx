@@ -67,7 +67,7 @@ export default function ServicesPage() {
       </div>
 
       {/* サービスナビ */}
-      <div style={{ background: 'var(--color-neutral-100)', padding: '2rem var(--container-padding)', borderBottom: '1px solid var(--color-neutral-300)' }}>
+      <div style={{ background: 'var(--col-neutral)', padding: '2rem var(--container-pad)', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
         <div className="service-nav">
           <a href="#consultation" className="service-nav__btn">💬 個別相談</a>
           <a href="#course" className="service-nav__btn">📚 家計整理アドバイザー講座</a>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
                 <Link href="/contact" className="btn btn-primary">無料相談を予約する</Link>
               </div>
               <div>
-                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1rem', marginBottom: '1.25rem', color: 'var(--color-dark)' }}>
+                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1rem', marginBottom: '1.25rem', color: 'var(--col-body)' }}>
                   相談の流れ
                 </h3>
                 <div className="service-flow">
@@ -134,15 +134,15 @@ export default function ServicesPage() {
                 <Link href="/contact" className="btn btn-primary">講座について問い合わせる</Link>
               </div>
               <div>
-                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1rem', marginBottom: '1rem', color: 'var(--color-dark)' }}>
+                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1rem', marginBottom: '1rem', color: 'var(--col-body)' }}>
                   受講で得られること
                 </h3>
                 <ul className="service-feature-list">
                   {COURSE_BENEFITS.map((b, i) => (
-                    <li key={i}><span style={{ color: 'var(--color-primary)' }}>✓</span>{b}</li>
+                    <li key={i}><span style={{ color: 'var(--col-gold)' }}>✓</span>{b}</li>
                   ))}
                 </ul>
-                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1rem', marginBottom: '1rem', marginTop: '1.5rem', color: 'var(--color-dark)' }}>
+                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1rem', marginBottom: '1rem', marginTop: '1.5rem', color: 'var(--col-body)' }}>
                   講座の特徴
                 </h3>
                 <ul className="service-feature-list">
@@ -150,12 +150,12 @@ export default function ServicesPage() {
                     <li key={i}>{f}</li>
                   ))}
                 </ul>
-                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1rem', marginBottom: '1rem', marginTop: '1.5rem', color: 'var(--color-dark)' }}>
+                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1rem', marginBottom: '1rem', marginTop: '1.5rem', color: 'var(--col-body)' }}>
                   こんな方におすすめ
                 </h3>
                 <ul className="service-feature-list">
                   {COURSE_TARGET.map((t, i) => (
-                    <li key={i}><span style={{ color: '#5E8063' }}>◎</span>{t}</li>
+                    <li key={i}><span style={{ color: 'var(--col-gold)' }}>◎</span>{t}</li>
                   ))}
                 </ul>
               </div>
@@ -171,10 +171,10 @@ export default function ServicesPage() {
             <h2 className="service-detail__title">グループセミナー</h2>
             <div className="service-coming-soon">
               <p style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🌸</p>
-              <p style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.1rem', color: 'var(--color-dark)', marginBottom: '0.75rem' }}>
+              <p style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.1rem', color: 'var(--col-body)', marginBottom: '0.75rem' }}>
                 ただいま準備中です
               </p>
-              <p style={{ fontSize: '0.875rem', color: 'var(--color-dark)', opacity: 0.65, marginBottom: '1.5rem', lineHeight: 1.8 }}>
+              <p style={{ fontSize: '0.875rem', color: 'var(--col-body)', opacity: 0.65, marginBottom: '1.5rem', lineHeight: 1.8 }}>
                 同じ悩みを持つ仲間と一緒に学ぶ、温かい少人数制のセミナーを準備しています。<br />
                 開催情報はメールでお知らせします。
               </p>
@@ -241,18 +241,22 @@ export default function ServicesPage() {
       </div>
 
       {/* CTA */}
-      <section className="cta-section">
-        <FadeIn>
-          <span className="cta-section__eyebrow">Free Consultation</span>
-          <h2 className="cta-section__title">まずは、無料で話しましょう。</h2>
-          <p className="cta-section__body">
-            どのサービスが合うかわからなくても大丈夫。<br />
-            初回無料相談でヒアリングしてから、最適な方法をご提案します。
-          </p>
-          <div className="cta-section__btns">
-            <Link href="/contact" className="btn btn-primary btn--lg">無料相談を予約する</Link>
+      <section className="section--dark">
+        <div className="container">
+          <div className="cta-section">
+            <FadeIn>
+              <span className="cta-section__eyebrow" style={{ color: 'var(--col-gold)' }}>Free Consultation</span>
+              <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>まずは、無料で話しましょう。</h2>
+              <p className="cta-section__body" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                どのサービスが合うかわからなくても大丈夫。<br />
+                初回無料相談でヒアリングしてから、最適な方法をご提案します。
+              </p>
+              <div className="cta-section__btns">
+                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を予約する</Link>
+              </div>
+            </FadeIn>
           </div>
-        </FadeIn>
+        </div>
       </section>
     </>
   );

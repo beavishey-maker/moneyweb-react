@@ -78,8 +78,8 @@ const STATS = [
 ];
 
 const BLOG_POSTS = [
-  { cat: '家計管理', catColor: '#C17B5C', title: '40代女性の貯蓄割合はどれくらい？今すぐできる見直し3ステップ', date: '2025.12.15' },
-  { cat: 'キャリア', catColor: '#2C4A3E', title: '扶養内パートと扶養外、どちらが得？年収別シミュレーション', date: '2025.12.08' },
+  { cat: '家計管理', catColor: '#B8975A', title: '40代女性の貯蓄割合はどれくらい？今すぐできる見直し3ステップ', date: '2025.12.15' },
+  { cat: 'キャリア', catColor: '#1A1A1A', title: '扶養内パートと扶養外、どちらが得？年収別シミュレーション', date: '2025.12.08' },
   { cat: '老後・年金', catColor: '#B8975A', title: '40代専業主婦でもiDeCoは始めるべき？メリットと注意点', date: '2025.11.28' },
 ];
 
@@ -172,10 +172,11 @@ export default function HomePage() {
             </div>
             <FadeIn delay={200}>
               <div style={{
-                background: 'var(--col-warm)',
-                border: '1px solid var(--col-border)',
-                borderRadius: '1.5rem',
+                background: 'var(--col-neutral)',
+                border: '1px solid rgba(184,151,90,0.15)',
+                borderRadius: '20px',
                 padding: 'clamp(1.75rem, 4vw, 3rem)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.04)',
               }}>
                 <p style={{
                   fontFamily: 'Noto Serif JP, serif',
@@ -187,7 +188,7 @@ export default function HomePage() {
                   それは、あなたが怠けているからでも、<br />
                   能力が足りないからでもありません。<br />
                   <br />
-                  ただ、<strong style={{ fontWeight: 400, color: 'var(--col-terra)' }}>「仕組み」を知らないだけ</strong>。<br />
+                  ただ、<strong style={{ fontWeight: 400, color: 'var(--col-gold)' }}>「仕組み」を知らないだけ</strong>。<br />
                   一緒に整理すれば、必ず道は見えてきます。
                 </p>
               </div>
@@ -400,11 +401,11 @@ export default function HomePage() {
         <div className="container">
           <div className="cta-section">
             <FadeIn>
-              <p className="label-en" style={{ color: 'var(--col-terra)', marginBottom: '1.5rem' }}>Free Consultation</p>
-              <h2 className="cta-section__title" style={{ color: 'var(--col-cream)' }}>
+              <p className="label-en" style={{ color: 'var(--col-gold)', marginBottom: '1.5rem' }}>Free Consultation</p>
+              <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>
                 まずは、話してみませんか。
               </h2>
-              <p className="cta-section__sub" style={{ color: 'rgba(253,250,245,0.55)' }}>
+              <p className="cta-section__sub" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 初回60分は無料です。<br />
                 Zoom対応なので、全国どこからでもOK。<br />
                 保険商品の勧誘は一切ありません。
@@ -413,7 +414,7 @@ export default function HomePage() {
                 無料相談を予約する
                 <ArrowRight size={16} />
               </Link>
-              <p className="cta-section__note" style={{ color: 'rgba(253,250,245,0.3)' }}>
+              <p className="cta-section__note" style={{ color: 'rgba(255,255,255,0.3)' }}>
                 ※ 予約後のキャンセルも無料・ペナルティなし
               </p>
             </FadeIn>
