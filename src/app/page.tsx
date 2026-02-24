@@ -187,7 +187,7 @@ export default function HomePage() {
         <div className="hero__image-side">
           <div className="hero__image-placeholder">
             <Image
-              src="/images/DSC3587-1024x683.jpg"
+              src="/images/DSC3587-2048x1366.jpg"
               alt="渡辺加奈子"
               fill
               style={{ objectFit: 'cover', objectPosition: '75% center' }}
