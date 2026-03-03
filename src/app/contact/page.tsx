@@ -4,20 +4,17 @@ import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
 
 const STEPS = [
-  { title: 'フォームからお問い合わせ', desc: '相談内容は「なんとなく不安」程度で構いません。' },
-  { title: 'プランナーからご連絡', desc: '2〜3営業日以内にメールでご連絡します。' },
-  { title: '初回無料オンライン相談（60分・Zoom）', desc: '現状ヒアリングとお悩み整理を丁寧に行います。' },
-  { title: '今後の流れをご提案', desc: '継続は任意です。無理なおすすめは一切しません。' },
+  { title: 'フォームからお問い合わせ', desc: '相談内容はざっくりで構いません。「なんとなく不安」でも大丈夫です。' },
+  { title: 'メールで日程確認', desc: '2営業日以内にメールでご連絡し、ご都合の良い日時を調整します。' },
+  { title: '初回60分・無料相談', desc: 'オンライン（Zoom / Google Meet）または対面（東京・神奈川・埼玉）でご相談いただけます。' },
 ];
 
-const WORRY_CATS = [
-  '家計の見直し・節約',
-  '老後資金・年金',
+const CONSULT_TOPICS = [
+  '老後・年金',
+  '住宅ローン',
+  '保険見直し',
   '教育費・子育て',
-  '働き方・扶養の壁',
-  '転職・副業・キャリア',
-  'NISAやiDeCoなど投資',
-  '家計整理アドバイザー講座',
+  'ライフプラン総合',
   'その他',
 ];
 
@@ -84,7 +81,7 @@ export default function ContactPage() {
                     <p className="form-success__emoji">✅</p>
                     <h3 className="form-success__title">送信が完了しました！</h3>
                     <p className="form-success__text">
-                      2〜3営業日以内にメールにてご連絡いたします。<br />
+                      2営業日以内にメールにてご連絡いたします。<br />
                       迷惑メールフォルダもご確認ください。
                     </p>
                     <a href="/" className="btn btn-outline" style={{ marginTop: '1.5rem' }}>
@@ -115,6 +112,21 @@ export default function ContactPage() {
                       />
                     </div>
 
+                    {/* ふりがな */}
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="furigana">
+                        ふりがな <span className="form-required">必須</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="furigana"
+                        name="furigana"
+                        required
+                        className="form-input"
+                        placeholder="例：わたなべ かなこ"
+                      />
+                    </div>
+
                     {/* メールアドレス */}
                     <div className="form-group">
                       <label className="form-label" htmlFor="email">
@@ -130,36 +142,50 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    {/* 年代 */}
+                    {/* 電話番号 */}
                     <div className="form-group">
-                      <p className="form-label">年代</p>
-                      <div className="form-radio-group">
-                        {['30代', '40代', '50代', '60代以上'].map((age) => (
-                          <label key={age} className="form-radio-label">
-                            <input type="radio" name="age" value={age} />
-                            <span>{age}</span>
-                          </label>
-                        ))}
-                      </div>
+                      <label className="form-label" htmlFor="phone">
+                        電話番号 <span className="form-optional">任意</span>
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        className="form-input"
+                        placeholder="例：090-1234-5678"
+                      />
                     </div>
 
-                    {/* お悩みカテゴリ */}
+                    {/* ご相談テーマ */}
                     <div className="form-group">
-                      <p className="form-label">お悩みカテゴリ（複数選択可）</p>
+                      <p className="form-label">ご相談テーマ <span className="form-required">必須</span>（複数選択可）</p>
                       <div className="form-check-group">
-                        {WORRY_CATS.map((cat) => (
-                          <label key={cat} className="form-check-label">
-                            <input type="checkbox" name="category" value={cat} />
-                            <span>{cat}</span>
+                        {CONSULT_TOPICS.map((topic) => (
+                          <label key={topic} className="form-check-label">
+                            <input type="checkbox" name="topic" value={topic} />
+                            <span>{topic}</span>
                           </label>
                         ))}
                       </div>
                     </div>
 
-                    {/* ご相談内容 */}
+                    {/* ご希望の相談方法 */}
+                    <div className="form-group">
+                      <p className="form-label">ご希望の相談方法 <span className="form-required">必須</span></p>
+                      <div className="form-radio-group">
+                        {['オンライン', '対面（東京）', 'どちらでも可'].map((method) => (
+                          <label key={method} className="form-radio-label">
+                            <input type="radio" name="contact-method" value={method} required />
+                            <span>{method}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* ご相談内容・ご質問 */}
                     <div className="form-group">
                       <label className="form-label" htmlFor="message">
-                        ご相談内容 <span className="form-optional">任意</span>
+                        ご相談内容・ご質問 <span className="form-optional">任意</span>
                       </label>
                       <textarea
                         id="message"
@@ -170,17 +196,18 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    {/* 希望連絡方法 */}
+                    {/* ご希望の日程 */}
                     <div className="form-group">
-                      <p className="form-label">ご希望の連絡方法</p>
-                      <div className="form-radio-group">
-                        {['メール', 'ビデオ通話（Zoom等）'].map((method) => (
-                          <label key={method} className="form-radio-label">
-                            <input type="radio" name="contact-method" value={method} />
-                            <span>{method}</span>
-                          </label>
-                        ))}
-                      </div>
+                      <label className="form-label" htmlFor="preferred-dates">
+                        ご希望の日程 <span className="form-optional">任意</span>
+                      </label>
+                      <textarea
+                        id="preferred-dates"
+                        name="preferred-dates"
+                        className="form-textarea"
+                        rows={3}
+                        placeholder="例：平日14時以降、土曜の午前中など"
+                      />
                     </div>
 
                     {/* 同意チェック */}
@@ -209,15 +236,16 @@ export default function ContactPage() {
               <div className="contact-sidebar">
                 <div className="contact-info-card">
                   <h3>📧 メール対応</h3>
-                  <p>2〜3営業日以内にご返信します。土日祝は翌営業日対応となります。</p>
+                  <p>2営業日以内にご返信します。日曜・祝日は翌営業日対応となります。</p>
+                  <p style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--col-muted)' }}>対応時間：平日10:00〜19:00 / 土曜10:00〜17:00</p>
                 </div>
                 <div className="contact-info-card">
-                  <h3>💻 ビデオ通話</h3>
-                  <p>Zoomを使ったオンライン相談に対応しています。全国どこからでもご相談いただけます。</p>
+                  <h3>💻 オンライン相談</h3>
+                  <p>ZoomまたはGoogle Meetを使用します。全国どこからでもご相談いただけます。</p>
                 </div>
                 <div className="contact-info-card">
                   <h3>✅ 安心してください</h3>
-                  <p>初回60分は完全無料。保険・金融商品の勧誘は一切ありません。怒ったり責めたりすることは、絶対にしません。</p>
+                  <p>初回60分は完全無料。金融商品の勧誘は一切ありません。お客様の情報は厳重に管理します。</p>
                 </div>
               </div>
             </div>

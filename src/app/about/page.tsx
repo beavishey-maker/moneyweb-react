@@ -6,34 +6,40 @@ import SectionHeading from '@/components/ui/SectionHeading';
 const TIMELINE = [
   {
     phase: 'Phase 1',
-    title: '日常と葛藤',
-    text: '医療事務として働きながら子育てをする毎日。家計簿は3日で挫折。仕事では行き詰まりを感じ、「このままでいいのかな」という焦りが積もっていきました。「私なんて」という言葉が、いつしか口癖になっていました。',
+    title: '医療の現場で',
+    text: '医療機関で20年以上勤務。多様な患者さんの人生と向き合う中で、「お金の知識が人を安心させる力を持つ」ということを深く実感するようになりました。',
   },
   {
     phase: 'Phase 2',
-    title: '転機と気づき',
-    text: 'FPの知識と「家計整理アドバイザー」の考え方に出会い、衝撃を受けました。「計算が苦手」でも「意志が弱い」わけでもない。ただ、正しい仕組みを知らなかっただけだった。その気づきが、すべての始まりでした。',
+    title: 'FPとして独立',
+    text: 'AFP資格と投資診断士の資格を取得し、ファイナンシャルプランナーとして独立。老後・住宅・保険・教育費など、一人ひとりのライフプランに寄り添うサポートを始めました。',
   },
   {
     phase: 'Phase 3',
-    title: '現在の使命',
-    text: '同じように悩む女性たちを、お金とキャリアの両面から支えたい——その想いで、国家資格キャリアコンサルタントも取得。「伴走プランナー」として、あなたの隣を歩いていきたいと思っています。',
+    title: '資格の拡充',
+    text: '国家資格キャリアコンサルタントと家計整理アドバイザー認定講師の資格も取得。お金とキャリアの両面から包括的なサポートができる体制を整えました。',
+  },
+  {
+    phase: 'Phase 4',
+    title: '現在の活動',
+    text: '中高年のキャリア形成に悩む方を対象に、お金とキャリアを組み合わせた全国オンライン相談を提供しています。「寄り添うお金のパートナー」として、あなたの未来を一緒に描きたいと思っています。',
   },
 ];
 
 const CREDENTIALS = [
-  { name: 'ファイナンシャルプランナー（FP）', desc: '家計・貯蓄・投資・老後・保険・税金など総合的なライフプランニング全般のアドバイスが可能。' },
-  { name: '国家資格キャリアコンサルタント', desc: '転職・復職・副業・定年後など、働き方の選択肢を整理し、あなたの強みと希望から最適な道を一緒に考えます。' },
-  { name: '家計整理アドバイザー', desc: '固定費・変動費の仕分けから始める、「計算しない」家計管理。自然とお金が貯まる仕組みをつくります。' },
+  { name: 'AFP（ファイナンシャルプランニング技能士2級）', desc: '日本FP協会認定。家計・老後資金・保険・住宅ローン・教育資金など、総合的なライフプランニングのアドバイスが可能。' },
+  { name: '投資診断士', desc: '投資診断協会認定。お客様の状況とリスク許容度に合わせた、中立的な投資アドバイスを提供します。' },
+  { name: '家計整理アドバイザー認定講師', desc: '日本家計整理アドバイザー協会認定。整理整頓の考え方をお金に応用した、計算しない家計管理を指導・普及します。' },
+  { name: '国家資格キャリアコンサルタント', desc: '厚生労働省認定。転職・復職・副業・ライフプランなど、働き方の選択肢を整理し最適な道を一緒に考えます。' },
 ];
 
 const FIT_YES = [
-  '計算が苦手なのになぜか貯金が増えない',
-  'お金とキャリアの両方に不安がある',
-  '子育て後・転機のタイミングにいる',
-  '一緒に考えてくれる人を求めている',
-  '対等に話せる関係を望んでいる',
-  'オンラインで相談したい（全国OK）',
+  '老後の資金計画が不安な方',
+  '住宅購入・ローンの相談をしたい方',
+  '保険を見直したい方',
+  '教育費の準備を始めたい方',
+  '40代以上の女性のライフプランを考えたい方',
+  'オンラインで全国から相談したい方',
 ];
 
 const FIT_NO = [
@@ -48,9 +54,9 @@ export default function AboutPage() {
     <>
       {/* HERO */}
       <div className="page-hero">
-        <p className="page-hero__eyebrow">About Me</p>
-        <h1 className="page-hero__title">伴走プランナー、渡辺加奈子について</h1>
-        <p className="page-hero__desc">あなたのことを、一番近くで支えたい。</p>
+        <p className="page-hero__eyebrow">Profile</p>
+        <h1 className="page-hero__title">プロフィール</h1>
+        <p className="page-hero__desc">お金とキャリアの伴走プランナー、渡辺加奈子です。</p>
       </div>
 
       {/* プロフィール基本情報 */}
@@ -61,15 +67,16 @@ export default function AboutPage() {
               <div className="profile-strip__photo-wrap">
                 <Image
                   src="/images/DSC3587-1024x683.jpg"
-                  alt="渡辺かなこ"
+                  alt="渡辺加奈子"
                   width={200}
                   height={200}
                   className="profile-strip__photo"
                 />
                 <div className="profile-strip__quals">
-                  <span className="tag">FP</span>
-                  <span className="tag tag--green">キャリコン</span>
-                  <span className="tag">家計整理アドバイザー</span>
+                  <span className="tag">AFP</span>
+                  <span className="tag tag--green">投資診断士</span>
+                  <span className="tag">家計整理アドバイザー認定講師</span>
+                  <span className="tag tag--green">国家資格キャリアコンサルタント</span>
                 </div>
               </div>
               <div className="profile-strip__body">
@@ -77,11 +84,11 @@ export default function AboutPage() {
                   渡辺 加奈子
                 </h2>
                 <p style={{ color: 'var(--col-gold)', fontSize: '0.85rem', marginBottom: '1.5rem', letterSpacing: '0.05em' }}>
-                  FP &amp; 国家資格キャリアコンサルタント / 伴走プランナー
+                  お金とキャリアの伴走プランナー / FP・国家資格キャリアコンサルタント
                 </p>
-                <p>40代・子育て中の働く母として、医療事務のキャリアを持ちながら、FP・キャリアコンサルタントとして活動しています。</p>
-                <p>「正しい仕組みを知らないだけで、あなたは何も悪くない」——この言葉を胸に、一人ひとりに寄り添った伴走サポートを提供しています。</p>
-                <p>得意なことは、難しいお金の話をわかりやすく、かつ温かく伝えること。あなたの「なんとなく不安」を、一緒に言葉にしていきましょう。</p>
+                <p>医療機関で20年以上勤務した後、「お金の知識が人を安心させる力を持つ」ということを実感し、FPとして独立。その後、キャリアコンサルタントの資格も取得しました。</p>
+                <p>老後・住宅ローン・保険・教育費など、ライフステージに合わせた幅広い相談に対応。特に40代以上の女性のライフプランニングを得意としています。</p>
+                <p>全国オンライン対応で、あなたの未来を一緒に描くパートナーとして伴走します。</p>
               </div>
             </div>
           </FadeIn>
@@ -92,7 +99,7 @@ export default function AboutPage() {
       <section className="section section--sub">
         <div className="container">
           <FadeIn>
-            <SectionHeading label="My Story" title="私がここにいる理由" desc="順風満帆に見えて、実は葛藤と失敗の連続でした。" />
+            <SectionHeading label="My Story" title="私がここにいる理由" desc="医療の現場からFPへ。お金とキャリアで人を支えるプランナーになるまで。" />
           </FadeIn>
           <FadeIn delay={100}>
             <div className="timeline">
@@ -176,13 +183,13 @@ export default function AboutPage() {
               <span className="cta-section__eyebrow" style={{ color: 'var(--col-gold)' }}>Free Consultation</span>
               <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>まずは、話してみませんか？</h2>
               <p className="cta-section__body" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                どんな小さなモヤモヤでも、構いません。<br />
-                「相談するほどじゃない」なんてことは、ありません。<br />
-                あなたのペースで、お話しください。
+                初回60分は完全無料です。<br />
+                どんな小さなお悩みでも、お気軽にご相談ください。<br />
+                あなたのペースで、一緒に考えましょう。
               </p>
               <div className="cta-section__btns">
-                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を予約する</Link>
-                <Link href="/services" className="btn btn--outline btn--lg" style={{ color: 'rgba(255,255,255,0.7)', borderColor: 'rgba(255,255,255,0.2)' }}>サービス一覧を見る</Link>
+                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を申し込む</Link>
+                <Link href="/services" className="btn btn--outline btn--lg" style={{ color: 'rgba(255,255,255,0.7)', borderColor: 'rgba(255,255,255,0.2)' }}>サービス・料金を見る</Link>
               </div>
             </FadeIn>
           </div>
