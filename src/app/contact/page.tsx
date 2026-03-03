@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
 
@@ -30,30 +29,31 @@ export default function ContactPage() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // チェックボックス（複数選択）を文字列にまとめる
-    const topics = data.getAll('topic') as string[];
+    // チェックボックス（複数選択）を配列で取得
+    const topic = data.getAll('topic');
 
-    const templateParams = {
-      name: data.get('name') as string,
-      furigana: data.get('furigana') as string,
-      email: data.get('email') as string,
-      phone: (data.get('phone') as string) || '未入力',
-      topic: topics.length > 0 ? topics.join('、') : '未選択',
-      contact_method: data.get('contact-method') as string,
-      message: (data.get('message') as string) || '（なし）',
-      preferred_dates: (data.get('preferred-dates') as string) || '（なし）',
+    const payload = {
+      name: data.get('name'),
+      furigana: data.get('furigana'),
+      email: data.get('email'),
+      phone: data.get('phone'),
+      topic,
+      contactMethod: data.get('contact-method'),
+      message: data.get('message'),
+      preferredDates: data.get('preferred-dates'),
     };
 
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
-      );
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error('送信失敗');
       setSubmitted(true);
     } catch (err) {
-      console.error('EmailJS送信エラー:', err);
+      console.error('送信エラー:', err);
       alert('送信に失敗しました。時間をおいてお試しください。');
     } finally {
       setIsLoading(false);
