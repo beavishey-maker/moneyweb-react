@@ -29,12 +29,28 @@ export default function ContactPage() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
+    // チェックボックス（複数選択）を配列で取得
+    const topic = data.getAll('topic');
+
+    const payload = {
+      name: data.get('name'),
+      furigana: data.get('furigana'),
+      email: data.get('email'),
+      phone: data.get('phone'),
+      topic,
+      contactMethod: data.get('contact-method'),
+      message: data.get('message'),
+      preferredDates: data.get('preferred-dates'),
+    };
+
     try {
-      await fetch('/', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      if (!res.ok) throw new Error('送信失敗');
       setSubmitted(true);
     } catch (err) {
       console.error('送信エラー:', err);

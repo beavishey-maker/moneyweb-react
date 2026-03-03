@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { Menu, Instagram } from 'lucide-react';
 import { KineticNavigation, type NavItem } from '@/components/ui/kinetic-navigation';
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'トップページ',   labelEn: 'Home',     href: '/'         },
   { label: 'プロフィール',   labelEn: 'About',    href: '/about'    },
   { label: 'サービス・料金', labelEn: 'Services', href: '/services' },
+  { label: 'お金タイプ診断', labelEn: 'Quiz',     href: '/quiz'     },
   { label: 'よくある質問',   labelEn: 'FAQ',      href: '/faq'      },
   { label: 'お問い合わせ',   labelEn: 'Contact',  href: '/contact'  },
 ];
@@ -16,6 +17,7 @@ const NAV_ITEMS: NavItem[] = [
 const DESKTOP_NAV = [
   { label: 'プロフィール',   href: '/about'    },
   { label: 'サービス・料金', href: '/services' },
+  { label: 'お金タイプ診断', href: '/quiz'     },
   { label: 'よくある質問',   href: '/faq'      },
   { label: 'お問い合わせ',   href: '/contact'  },
 ];
@@ -64,6 +66,15 @@ export default function Header() {
 
           {/* 右側アクション */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <a
+              href="https://www.instagram.com/rinn_happy_life/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="header-instagram"
+            >
+              <Instagram size={20} />
+            </a>
             <Link href="/contact" className="header-cta" aria-label="無料相談を予約する">
               無料相談
             </Link>
