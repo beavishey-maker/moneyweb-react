@@ -6,7 +6,7 @@ import SectionHeading from '@/components/ui/SectionHeading';
 const STEPS = [
   { title: 'フォームからお問い合わせ', desc: '相談内容はざっくりで構いません。「なんとなく不安」でも大丈夫です。' },
   { title: 'メールで日程確認', desc: '2営業日以内にメールでご連絡し、ご都合の良い日時を調整します。' },
-  { title: '初回60分・無料相談', desc: 'オンライン（Zoom / Google Meet）または対面（東京・神奈川・埼玉）でご相談いただけます。' },
+  { title: '初回30分・無料相談', desc: 'オンライン（全国対応）または対面（宮城県内・お客様ご指定の場所）でご相談いただけます。' },
 ];
 
 const CONSULT_TOPICS = [
@@ -66,7 +66,7 @@ export default function ContactPage() {
       <div className="page-hero">
         <p className="page-hero__eyebrow">Contact</p>
         <h1 className="page-hero__title">お問い合わせ・無料相談のご予約</h1>
-        <p className="page-hero__desc">初回60分無料。まずはお気軽にご相談ください。</p>
+        <p className="page-hero__desc">初回30分・完全無料。まずはお気軽にご相談ください。</p>
       </div>
 
       <section className="section section--white">
@@ -189,7 +189,7 @@ export default function ContactPage() {
                     <div className="form-group">
                       <p className="form-label">ご希望の相談方法 <span className="form-required">必須</span></p>
                       <div className="form-radio-group">
-                        {['オンライン', '対面（東京）', 'どちらでも可'].map((method) => (
+                        {['オンライン', '対面（宮城県内）', 'どちらでも可'].map((method) => (
                           <label key={method} className="form-radio-label">
                             <input type="radio" name="contact-method" value={method} required />
                             <span>{method}</span>
@@ -261,7 +261,7 @@ export default function ContactPage() {
                 </div>
                 <div className="contact-info-card">
                   <h3>✅ 安心してください</h3>
-                  <p>初回60分は完全無料。金融商品の勧誘は一切ありません。お客様の情報は厳重に管理します。</p>
+                  <p>初回30分は完全無料。金融商品の勧誘は一切ありません。お客様の情報は厳重に管理します。</p>
                 </div>
               </div>
             </div>
