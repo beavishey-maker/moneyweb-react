@@ -47,6 +47,8 @@ export async function POST(req: NextRequest) {
     </div>
   `;
 
+  console.log('RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
+
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -65,8 +67,9 @@ export async function POST(req: NextRequest) {
 
     if (!res.ok) {
       const error = await res.json();
-      console.error('Resend error:', error);
-      return NextResponse.json({ error: '送信に失敗しました' }, { status: 500 });
+      console.error('Resend error status:', res.status);
+      console.error('Resend error body:', JSON.stringify(error));
+      return NextResponse.json({ error: '送信に失敗しました', detail: error }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true });
