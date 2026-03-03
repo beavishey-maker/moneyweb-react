@@ -60,7 +60,7 @@
   --text-7xl:  7rem;
 
   /* Spacing */
-  --space-section: clamp(5rem, 10vw, 8rem);
+  --space-section: clamp(2.5rem, 5vw, 4rem);
   --container: 1200px;
   --container-pad: clamp(1.25rem, 5vw, 3rem);
 
@@ -574,10 +574,10 @@ a { color: inherit; text-decoration: none; }
 }
 .hero__title {
   font-family: 'Noto Serif JP', serif;
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
   font-weight: 300;
   line-height: 1.4;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   margin-bottom: 1.5rem;
 }
 .hero__title em {
@@ -2632,7 +2632,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ── SERVICE DETAIL ──────────────────────────────── */
 .service-detail {
-  padding: var(--space-section) 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
   border-bottom: 1px solid rgba(0,0,0,0.07);
 }
 .service-detail:last-of-type { border-bottom: none; }
@@ -3149,3 +3149,25 @@ a { color: inherit; text-decoration: none; }
   text-underline-offset: 3px;
 }
 .prose-section a:hover { color: var(--col-gold-d); }
+
+/* ── INSTAGRAM LINKS ────────────────────────────────── */
+.header-instagram {
+  display: flex;
+  align-items: center;
+  color: var(--col-muted);
+  transition: color 0.2s;
+  padding: 0.25rem;
+}
+.header-instagram:hover { color: var(--col-gold); }
+
+.footer-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--col-muted);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: color 0.2s;
+}
+.footer-instagram:hover { color: var(--col-gold); }

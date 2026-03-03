@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -13,7 +14,7 @@ export default function Footer() {
             </div>
             <p className="footer-brand__tagline">お金とキャリアの伴走プランナー</p>
             <p className="footer-brand__desc">
-              老後・住宅ローン・保険・教育費など、ライフステージに合わせたFP相談を全国オンラインで提供しています。
+              家計整理・キャリア相談・進学資金など、お金と働き方を一緒に考えるFP相談を全国オンラインで提供しています。
             </p>
           </div>
 
@@ -21,10 +22,9 @@ export default function Footer() {
           <div>
             <p className="footer-col__title">Services</p>
             <ul className="footer-col__links">
-              <li><Link href="/services#retirement">老後・年金相談</Link></li>
-              <li><Link href="/services#housing">住宅ローン相談</Link></li>
-              <li><Link href="/services#insurance">保険見直し相談</Link></li>
-              <li><Link href="/services#education">教育費・子育て相談</Link></li>
+              <li><Link href="/services#course">家計整理アドバイザー2級講座</Link></li>
+              <li><Link href="/services#consultation">家計×キャリア個別相談</Link></li>
+              <li><Link href="/services#seminar">進学マネーセミナー</Link></li>
             </ul>
           </div>
 
@@ -50,6 +50,16 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
+          <a
+            href="https://www.instagram.com/rinn_happy_life/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-instagram"
+            aria-label="Instagram"
+          >
+            <Instagram size={18} />
+            <span>@rinn_happy_life</span>
+          </a>
           <p className="footer-bottom__copy">
             &copy; {new Date().getFullYear()} money web — Kanako Watanabe. All rights reserved.
           </p>
