@@ -27,11 +27,12 @@ export default function InstagramFeed() {
           if (window.instgrm) window.instgrm.Embeds.process();
         }}
       />
-      <div id="instagramContainer">
+      <div id="instagramContainer" style={{ display: 'flex', justifyContent: 'center' }}>
         <blockquote
           className="instagram-media"
           data-instgrm-permalink={`https://www.instagram.com/${INSTAGRAM_USERNAME}/`}
           data-instgrm-version="14"
+          style={{ margin: '0 auto' }}
         />
       </div>
     </section>
