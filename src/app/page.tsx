@@ -4,7 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Instagram } from 'lucide-react';
+import InstagramFeed from '@/components/InstagramFeed';
 
 /* ── データ ─────────────────────────────────────── */
 const WHY_CARDS = [
@@ -162,6 +163,28 @@ export default function HomePage() {
                 <ArrowRight size={16} />
               </Link>
             </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ── Instagram ─────────────────────────── */}
+      <section className="section section--warm">
+        <div className="container">
+          <FadeIn>
+            <SectionHeading en="Instagram" jp="インスタグラム" center />
+            <p className="instagram-section__handle">
+              <a
+                href="https://www.instagram.com/rinn_happy_life/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram size={15} style={{ verticalAlign: 'middle', marginRight: '0.3em' }} />
+                @rinn_happy_life
+              </a>
+            </p>
+          </FadeIn>
+          <FadeIn delay={100}>
+            <InstagramFeed />
           </FadeIn>
         </div>
       </section>
