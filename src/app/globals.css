@@ -1712,7 +1712,7 @@ a { color: inherit; text-decoration: none; }
 .floating-cta {
   position: fixed;
   bottom: 2rem;
-  right: 2rem;
+  left: 2rem;
   z-index: 90;
   display: flex;
   flex-direction: column;
