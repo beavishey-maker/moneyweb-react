@@ -33,6 +33,7 @@ export default function Footer() {
             <ul className="footer-col__links">
               <li><Link href="/about">プロフィール</Link></li>
               <li><Link href="/services">サービス・料金</Link></li>
+              <li><Link href="/glossary">FP用語集</Link></li>
               <li><Link href="/faq">よくある質問</Link></li>
               <li><Link href="/contact">お問い合わせ</Link></li>
             </ul>

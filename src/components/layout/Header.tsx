@@ -6,18 +6,20 @@ import { Menu, Instagram } from 'lucide-react';
 import { KineticNavigation, type NavItem } from '@/components/ui/kinetic-navigation';
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'トップページ',   labelEn: 'Home',     href: '/'         },
-  { label: 'プロフィール',   labelEn: 'About',    href: '/about'    },
-  { label: 'サービス・料金', labelEn: 'Services', href: '/services' },
-  { label: 'お金タイプ診断', labelEn: 'Quiz',     href: '/quiz'     },
-  { label: 'よくある質問',   labelEn: 'FAQ',      href: '/faq'      },
-  { label: 'お問い合わせ',   labelEn: 'Contact',  href: '/contact'  },
+  { label: 'トップページ',   labelEn: 'Home',     href: '/'          },
+  { label: 'プロフィール',   labelEn: 'About',    href: '/about'     },
+  { label: 'サービス・料金', labelEn: 'Services', href: '/services'  },
+  { label: 'お金タイプ診断', labelEn: 'Quiz',     href: '/quiz'      },
+  { label: 'FP用語集',       labelEn: 'Glossary', href: '/glossary'  },
+  { label: 'よくある質問',   labelEn: 'FAQ',      href: '/faq'       },
+  { label: 'お問い合わせ',   labelEn: 'Contact',  href: '/contact'   },
 ];
 
 const DESKTOP_NAV = [
   { label: 'プロフィール',   href: '/about'    },
   { label: 'サービス・料金', href: '/services' },
   { label: 'お金タイプ診断', href: '/quiz'     },
+  { label: 'FP用語集',       href: '/glossary' },
   { label: 'よくある質問',   href: '/faq'      },
   { label: 'お問い合わせ',   href: '/contact'  },
 ];
