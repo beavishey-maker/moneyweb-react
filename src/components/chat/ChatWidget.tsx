@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import Image from 'next/image';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -10,7 +9,7 @@ interface Message {
 
 const INITIAL_MESSAGE: Message = {
   role: 'assistant',
-  text: 'こんにちは！money webのAIアドバイザー「かなちゃん」です😊\nお金やキャリアのことで気になることがあれば、なんでも聞いてみてくださいね！',
+  text: 'こんにちは！money webのAIアドバイザー「AIかなこ」です😊\nお金やキャリアのことで気になることがあれば、なんでも聞いてみてくださいね！',
 };
 
 const SUGGESTED = [
@@ -79,14 +78,13 @@ export default function ChatWidget() {
       <button
         className={`chat-launcher${isOpen ? ' chat-launcher--open' : ''}`}
         onClick={() => setIsOpen(v => !v)}
-        aria-label={isOpen ? 'チャットを閉じる' : 'AIに相談する'}
+        aria-label={isOpen ? 'チャットを閉じる' : 'AIかなこに相談する'}
       >
         <span className="chat-launcher__ring" />
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/images/sd.jpg"
-          alt="かなちゃん"
-          width={56}
-          height={56}
+          alt="AIかなこ"
           className="chat-launcher__avatar"
         />
         {!isOpen && (
@@ -100,16 +98,15 @@ export default function ChatWidget() {
         {/* Header */}
         <div className="chat-header">
           <div className="chat-header__avatar-wrap">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/images/sd.jpg"
-              alt="かなちゃん"
-              width={48}
-              height={48}
+              alt="AIかなこ"
               className="chat-header__avatar"
             />
           </div>
           <div className="chat-header__info">
-            <p className="chat-header__name">かなちゃん</p>
+            <p className="chat-header__name">AIかなこ</p>
             <p className="chat-header__role">AI お金・キャリア アドバイザー</p>
           </div>
           <button
@@ -124,7 +121,8 @@ export default function ChatWidget() {
           {messages.map((msg, i) => (
             <div key={i} className={`chat-bubble chat-bubble--${msg.role}`}>
               {msg.role === 'assistant' && (
-                <Image src="/images/sd.jpg" alt="" width={28} height={28} className="chat-bubble__avatar" />
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src="/images/sd.jpg" alt="" className="chat-bubble__avatar" />
               )}
               <div className="chat-bubble__text">
                 {msg.text.split('\n').map((line, j) => (
@@ -135,7 +133,8 @@ export default function ChatWidget() {
           ))}
           {isLoading && (
             <div className="chat-bubble chat-bubble--assistant">
-              <Image src="/images/sd.jpg" alt="" width={28} height={28} className="chat-bubble__avatar" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/sd.jpg" alt="" className="chat-bubble__avatar" />
               <div className="chat-bubble__text chat-typing">
                 <span /><span /><span />
               </div>
@@ -176,6 +175,7 @@ export default function ChatWidget() {
             ↑
           </button>
         </form>
+        <p className="chat-disclaimer">AIの回答は参考情報です。正確でない場合があります。</p>
       </div>
     </>
   );

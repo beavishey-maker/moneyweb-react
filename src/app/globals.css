@@ -3515,3 +3515,14 @@ a:hover .which-service-card {
 }
 .chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
 .chat-send:not(:disabled):hover { background: var(--col-gold-d); }
+
+/* Chat disclaimer */
+.chat-disclaimer {
+  text-align: center;
+  font-size: 0.65rem;
+  color: var(--col-muted);
+  padding: 0.3rem 1rem 0.5rem;
+  margin: 0;
+  background: #fff;
+  flex-shrink: 0;
+}
