@@ -195,10 +195,13 @@ export default function HomePage() {
             </div>
           </FadeIn>
           <FadeIn delay={150}>
-            <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-              <Link href="/glossary" className="btn btn-outline btn--lg">
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2.5rem' }}>
+              <Link href="/glossary" className="btn btn--primary btn--lg">
                 用語集をすべて見る（87語）
                 <ArrowRight size={16} />
+              </Link>
+              <Link href="/glossary/quiz" className="btn btn--outline btn--lg">
+                🎯 用語クイズに挑戦
               </Link>
             </div>
           </FadeIn>
