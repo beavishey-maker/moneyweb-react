@@ -35,9 +35,9 @@ const SERVICES = [
     num: '03',
     title: '進学マネー\nセミナー',
     desc: '中学・高校・大学の進学費用を「見える化」。奨学金・教育ローンの賢い使い方まで、具体的な資金計画を一緒に作ります。',
-    href: '/services#seminar',
+    href: '/services',
     badge: 'グループ受講',
-    comingSoon: false,
+    comingSoon: true,
   },
 ];
 

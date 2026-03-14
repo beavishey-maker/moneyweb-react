@@ -22,9 +22,8 @@ export default function Footer() {
           <div>
             <p className="footer-col__title">Services</p>
             <ul className="footer-col__links">
-              <li><Link href="/services#course">家計整理アドバイザー2級講座</Link></li>
-              <li><Link href="/services#consultation">家計×キャリア個別相談</Link></li>
-              <li><Link href="/services#seminar">進学マネーセミナー</Link></li>
+              <li><Link href="/services/course">家計整理アドバイザー2級講座</Link></li>
+              <li><Link href="/services/consultation">家計×キャリア個別相談</Link></li>
             </ul>
           </div>
 

@@ -250,13 +250,11 @@ export default function CoursePage() {
                   <p style={{ fontSize: 'var(--text-sm)', fontWeight: '300', color: 'var(--col-muted)', lineHeight: '1.7' }}>お金と働き方を同時に整理するオーダーメイドのセッション</p>
                 </div>
               </Link>
-              <Link href="/services/seminar" style={{ textDecoration: 'none' }}>
-                <div className="service-link-card">
-                  <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '0.7rem', letterSpacing: '0.3em', color: 'var(--col-gold)', display: 'block', marginBottom: '0.5rem' }}>Service 03</span>
-                  <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: 'var(--text-base)', fontWeight: '400', marginBottom: '0.75rem' }}>進学マネーセミナー</h3>
-                  <p style={{ fontSize: 'var(--text-sm)', fontWeight: '300', color: 'var(--col-muted)', lineHeight: '1.7' }}>子どもの教育費を「見える化」して老後資金と両立する</p>
-                </div>
-              </Link>
+              <div className="service-link-card" style={{ opacity: 0.5 }}>
+                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '0.7rem', letterSpacing: '0.3em', color: 'var(--col-gold)', display: 'block', marginBottom: '0.5rem' }}>Service 03</span>
+                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: 'var(--text-base)', fontWeight: '400', marginBottom: '0.75rem' }}>進学マネーセミナー</h3>
+                <p style={{ fontSize: 'var(--text-sm)', fontWeight: '300', color: 'var(--col-muted)', lineHeight: '1.7' }}>近日公開予定</p>
+              </div>
             </div>
           </FadeIn>
         </section>
