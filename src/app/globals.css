@@ -1273,8 +1273,13 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.9;
 }
 .service-item__action {
-  padding: 1.5rem 2rem 1.5rem 0;
+  padding: 0 2rem 2rem 2rem;
   flex-shrink: 0;
+}
+@media (min-width: 700px) {
+  .service-item__action {
+    padding: 1.5rem 2rem 1.5rem 0;
+  }
 }
 .service-item__badge {
   font-size: var(--text-xs);
