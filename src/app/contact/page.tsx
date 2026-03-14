@@ -9,12 +9,6 @@ const STEPS = [
   { title: 'セッション・相談', desc: 'オンライン（全国対応）または対面（宮城県内・お客様ご指定の場所）でご相談いただけます。' },
 ];
 
-const CONSULT_TOPICS = [
-  '家計整理アドバイザー2級講座',
-  '家計×キャリア個別相談',
-  '進学マネーセミナー',
-  'その他・ご質問',
-];
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -28,14 +22,11 @@ export default function ContactPage() {
     const data = new FormData(form);
 
     // チェックボックス（複数選択）を配列で取得
-    const topic = data.getAll('topic');
-
     const payload = {
       name: data.get('name'),
       furigana: data.get('furigana'),
       email: data.get('email'),
       phone: data.get('phone'),
-      topic,
       contactMethod: data.get('contact-method'),
       message: data.get('message'),
       preferredDates: data.get('preferred-dates'),
@@ -168,19 +159,6 @@ export default function ContactPage() {
                         className="form-input"
                         placeholder="例：090-1234-5678"
                       />
-                    </div>
-
-                    {/* お問い合わせ内容 */}
-                    <div className="form-group">
-                      <p className="form-label">お問い合わせの内容 <span className="form-required">必須</span>（複数選択可）</p>
-                      <div className="form-check-group">
-                        {CONSULT_TOPICS.map((topic) => (
-                          <label key={topic} className="form-check-label">
-                            <input type="checkbox" name="topic" value={topic} />
-                            <span>{topic}</span>
-                          </label>
-                        ))}
-                      </div>
                     </div>
 
                     {/* ご希望の相談方法 */}
