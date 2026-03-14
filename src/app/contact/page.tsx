@@ -6,16 +6,14 @@ import SectionHeading from '@/components/ui/SectionHeading';
 const STEPS = [
   { title: 'フォームからお問い合わせ', desc: '相談内容はざっくりで構いません。「なんとなく不安」でも大丈夫です。' },
   { title: 'メールで日程確認', desc: '2営業日以内にメールでご連絡し、ご都合の良い日時を調整します。' },
-  { title: '初回30分・無料相談', desc: 'オンライン（全国対応）または対面（宮城県内・お客様ご指定の場所）でご相談いただけます。' },
+  { title: 'セッション・相談', desc: 'オンライン（全国対応）または対面（宮城県内・お客様ご指定の場所）でご相談いただけます。' },
 ];
 
 const CONSULT_TOPICS = [
-  '老後・年金',
-  '住宅ローン',
-  '保険見直し',
-  '教育費・子育て',
-  'ライフプラン総合',
-  'その他',
+  '家計整理アドバイザー2級講座',
+  '家計×キャリア個別相談',
+  '進学マネーセミナー',
+  'その他・ご質問',
 ];
 
 export default function ContactPage() {
@@ -65,8 +63,8 @@ export default function ContactPage() {
       {/* HERO */}
       <div className="page-hero">
         <p className="page-hero__eyebrow">Contact</p>
-        <h1 className="page-hero__title">お問い合わせ・無料相談のご予約</h1>
-        <p className="page-hero__desc">初回30分・完全無料。まずはお気軽にご相談ください。</p>
+        <h1 className="page-hero__title">お問い合わせ・ご相談のご予約</h1>
+        <p className="page-hero__desc">サービスへのお申し込み・ご質問・開催通知のご登録など、お気軽にどうぞ。</p>
       </div>
 
       <section className="section section--white">
@@ -172,9 +170,9 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    {/* ご相談テーマ */}
+                    {/* お問い合わせ内容 */}
                     <div className="form-group">
-                      <p className="form-label">ご相談テーマ <span className="form-required">必須</span>（複数選択可）</p>
+                      <p className="form-label">お問い合わせの内容 <span className="form-required">必須</span>（複数選択可）</p>
                       <div className="form-check-group">
                         {CONSULT_TOPICS.map((topic) => (
                           <label key={topic} className="form-check-label">
@@ -261,7 +259,7 @@ export default function ContactPage() {
                 </div>
                 <div className="contact-info-card">
                   <h3>✅ 安心してください</h3>
-                  <p>初回30分は完全無料。金融商品の勧誘は一切ありません。お客様の情報は厳重に管理します。</p>
+                  <p>金融商品の勧誘は一切ありません。お客様の情報はFPの倫理規定に基づき厳重に管理します。</p>
                 </div>
               </div>
             </div>

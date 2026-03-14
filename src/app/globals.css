@@ -2767,6 +2767,32 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--col-gold);
   color: var(--col-gold);
 }
+/* ── Service link card (hover border) ──── */
+.service-link-card {
+  background: var(--col-neutral);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: border-color var(--dur-fast) ease;
+  display: block;
+  height: 100%;
+}
+a:hover .service-link-card,
+.service-link-card:hover {
+  border-color: var(--col-gold);
+}
+/* ── Which service card ──── */
+.which-service-card {
+  background: var(--col-neutral);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 16px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: border-color var(--dur-fast) ease;
+}
+a:hover .which-service-card {
+  border-color: var(--col-gold);
+}
 .service-compare-table {
   width: 100%;
   border-collapse: collapse;
