@@ -1540,6 +1540,45 @@ a { color: inherit; text-decoration: none; }
   font-weight: 300;
 }
 
+/* ── GLOSSARY TEASER ────────────────────────────── */
+.glossary-teaser-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 600px) {
+  .glossary-teaser-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .glossary-teaser-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.glossary-teaser-card {
+  background: var(--col-neutral);
+  border: 1px solid var(--col-border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color var(--dur-fast) ease;
+}
+.glossary-teaser-card:hover { border-color: var(--col-gold); }
+.glossary-teaser-card__read {
+  font-size: 0.7rem;
+  color: var(--col-muted);
+  margin: 0 0 0.2rem;
+  letter-spacing: 0.05em;
+}
+.glossary-teaser-card__term {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--col-body);
+  margin: 0 0 0.6rem;
+}
+.glossary-teaser-card__desc {
+  font-size: var(--text-sm);
+  color: var(--col-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
 /* ── BLOG GRID ──────────────────────────────────── */
 .blog-grid {
   display: grid;

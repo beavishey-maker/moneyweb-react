@@ -167,6 +167,44 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Glossary Teaser ───────────────────── */}
+      <section className="section section--white">
+        <div className="container">
+          <FadeIn>
+            <SectionHeading en="FP Glossary" jp="FP用語集" center />
+            <p style={{ textAlign: 'center', color: 'var(--col-muted)', marginBottom: '2.5rem' }}>
+              知っておきたいお金の言葉を、わかりやすく解説しています。
+            </p>
+          </FadeIn>
+          <FadeIn delay={100}>
+            <div className="glossary-teaser-grid">
+              {[
+                { term: '複利', read: 'ふくり', desc: '利息が利息を生む仕組み。長期運用で資産を大きく育てる「お金の雪だるま」効果。' },
+                { term: 'iDeCo', read: 'イデコ', desc: '個人型確定拠出年金。掛金全額が所得控除になり、節税しながら老後資金を積み立てられる。' },
+                { term: 'NISA', read: 'ニーサ', desc: '少額投資非課税制度。運用益や配当が非課税になる国の優遇制度。2024年から新NISAに。' },
+                { term: 'ライフプラン', read: 'らいふぷらん', desc: '人生の大きなイベント（結婚・出産・住宅・老後）とお金の流れを時系列で可視化する設計図。' },
+                { term: 'キャッシュフロー表', read: 'きゃっしゅふろーひょう', desc: '年ごとの収入・支出・貯蓄残高を一覧化した家計の未来予測表。FP相談の基本ツール。' },
+                { term: 'ふるさと納税', read: 'ふるさとのうぜい', desc: '自治体に寄付することで税金の控除を受けつつ返礼品をもらえる制度。実質2,000円で活用可。' },
+              ].map(({ term, read, desc }) => (
+                <div key={term} className="glossary-teaser-card">
+                  <p className="glossary-teaser-card__read">{read}</p>
+                  <h3 className="glossary-teaser-card__term">{term}</h3>
+                  <p className="glossary-teaser-card__desc">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+          <FadeIn delay={150}>
+            <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+              <Link href="/glossary" className="btn btn-outline btn--lg">
+                用語集をすべて見る（87語）
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* ── Instagram ─────────────────────────── */}
       <section className="section section--warm">
         <div className="container">
