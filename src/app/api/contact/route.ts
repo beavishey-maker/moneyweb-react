@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 function esc(str: unknown): string {
   return String(str ?? '')
@@ -18,6 +18,13 @@ function row(label: string, value: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.error('RESEND_API_KEY is not set');
+    return NextResponse.json({ error: 'サーバー設定エラー' }, { status: 500 });
+  }
+
+  const resend = new Resend(apiKey);
   const body = await req.json();
   const { name, furigana, email, phone } = body;
 
@@ -59,22 +66,9 @@ export async function POST(req: NextRequest) {
     </div>
   `;
 
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailPass = process.env.GMAIL_APP_PASSWORD;
-
-  if (!gmailUser || !gmailPass) {
-    console.error('GMAIL_USER or GMAIL_APP_PASSWORD is not set');
-    return NextResponse.json({ error: 'サーバー設定エラー' }, { status: 500 });
-  }
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: { user: gmailUser, pass: gmailPass },
-  });
-
   try {
-    await transporter.sendMail({
-      from: `"money web" <${gmailUser}>`,
+    await resend.emails.send({
+      from: 'money web <onboarding@resend.dev>',
       to: 'kurosukurosu01@gmail.com',
       replyTo: email,
       subject: `【${subjectLabel}】${name} 様より`,
