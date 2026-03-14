@@ -34,8 +34,7 @@ const SERVICES = [
     price: '近日公開予定',
     priceNote: '少人数制・約2時間',
     img: '/images/service-seminar.png',
-    href: '',
-    comingSoon: true,
+    href: '/services/seminar',
     tags: ['少人数制', 'オンライン・対面', '教育費対策'],
   },
 ];
@@ -108,11 +107,7 @@ export default function ServicesPage() {
                       <span style={{ fontSize: '0.8rem', color: 'var(--col-muted)', fontWeight: '300' }}>{svc.priceNote}</span>
                     </div>
 
-                    {svc.comingSoon ? (
-                      <span className="tag tag--neutral" style={{ padding: '0.6rem 1.25rem', borderRadius: '50px', fontSize: 'var(--text-sm)' }}>近日公開予定</span>
-                    ) : (
-                      <Link href={svc.href} className="btn btn-primary">詳しく見る</Link>
-                    )}
+                    <Link href={svc.href} className="btn btn-primary">詳しく見る</Link>
                   </div>
                 </div>
               </FadeIn>
@@ -130,6 +125,7 @@ export default function ServicesPage() {
               {[
                 { text: '家計を根本から見直して、自分でも管理できるスキルを身につけたい', link: '/services/course', label: '→ 2級講座へ' },
                 { text: 'FPに直接相談して、自分の状況に合ったアドバイスをもらいたい', link: '/services/consultation', label: '→ 個別相談へ' },
+                { text: '子どもの進学費用が心配で、教育費の全体像を把握したい', link: '/services/seminar', label: '→ セミナーへ' },
                 { text: 'どのサービスが合うか正直わからない', link: '/contact', label: '→ まず問い合わせる' },
               ].map((item, i) => (
                 <Link key={i} href={item.link} style={{ textDecoration: 'none' }}>
