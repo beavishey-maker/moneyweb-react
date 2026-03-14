@@ -24,7 +24,11 @@ interface Question {
 function buildQuestions(): Question[] {
   const picked = shuffle(TERMS).slice(0, TOTAL);
   return picked.map(t => {
-    const wrong = shuffle(TERMS.filter(x => x.term !== t.term)).slice(0, 3).map(x => x.desc);
+    // 同カテゴリを優先して不正解選択肢を作る（紛らわしくする）
+    const sameCat = shuffle(TERMS.filter(x => x.term !== t.term && x.cat === t.cat));
+    const diffCat = shuffle(TERMS.filter(x => x.term !== t.term && x.cat !== t.cat));
+    const wrongPool = [...sameCat, ...diffCat];
+    const wrong = wrongPool.slice(0, 3).map(x => x.desc);
     const all = shuffle([t.desc, ...wrong]);
     return {
       term: t.term,
