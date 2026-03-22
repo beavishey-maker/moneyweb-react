@@ -66,17 +66,18 @@ export async function POST(req: NextRequest) {
     </div>
   `;
 
-  try {
-    await resend.emails.send({
-      from: 'money web <onboarding@resend.dev>',
-      to: 'kurosukurosu01@gmail.com',
-      replyTo: email,
-      subject: `【${subjectLabel}】${name} 様より`,
-      html,
-    });
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error('Mail error:', err);
+  const { error: sendError } = await resend.emails.send({
+    from: 'money web <onboarding@resend.dev>',
+    to: 'beavis.hey@gmail.com',
+    replyTo: email,
+    subject: `【${subjectLabel}】${name} 様より`,
+    html,
+  });
+
+  if (sendError) {
+    console.error('Mail error:', sendError);
     return NextResponse.json({ error: 'サーバーエラー' }, { status: 500 });
   }
+
+  return NextResponse.json({ ok: true });
 }

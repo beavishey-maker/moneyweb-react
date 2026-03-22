@@ -9,6 +9,7 @@ const SERVICES = [
     label: 'Course',
     title: '家計整理アドバイザー\n2級講座',
     desc: '計算が苦手でも大丈夫。「お金の道を整える」独自メソッドで家計を自分でコントロールできるようになります。資格取得を通じて、一生使えるスキルを身につけましょう。',
+    notes: ['全2回のコース', '毎週木曜日・日曜日開催', '申し込み期日：開催1週間前まで（テキスト郵送のため）'],
     price: '¥32,780（税込）',
     priceNote: 'テキスト・受験料込み',
     img: '/images/service-course.png',
@@ -31,8 +32,8 @@ const SERVICES = [
     label: 'Seminar',
     title: '進学マネー\nセミナー',
     desc: '中学・高校・大学の教育費を「見える化」するグループセミナー。奨学金・教育ローンの賢い使い方から、老後資金と両立する貯蓄計画まで、具体的に学べます。',
-    price: '近日公開予定',
-    priceNote: '少人数制・約2時間',
+    price: '¥1,000（税込）',
+    priceNote: 'お一人様｜少人数制・約2時間',
     img: '/images/service-seminar.png',
     href: '/services/seminar',
     tags: ['少人数制', 'オンライン・対面', '教育費対策'],
@@ -81,9 +82,20 @@ export default function ServicesPage() {
                     <h2 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: '300', lineHeight: '1.5', marginBottom: '1rem', whiteSpace: 'pre-line' }}>
                       {svc.title}
                     </h2>
-                    <p style={{ fontSize: 'var(--text-sm)', fontWeight: '300', lineHeight: '2', color: 'var(--col-muted)', marginBottom: '1.25rem' }}>
+                    <p style={{ fontSize: 'var(--text-sm)', fontWeight: '300', lineHeight: '2', color: 'var(--col-muted)', marginBottom: svc.notes ? '0.75rem' : '1.25rem' }}>
                       {svc.desc}
                     </p>
+
+                    {/* コース詳細（任意） */}
+                    {svc.notes && (
+                      <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                        {svc.notes.map((note) => (
+                          <li key={note} style={{ fontSize: 'var(--text-sm)', fontWeight: '300', color: 'var(--col-muted)', paddingLeft: '1em', position: 'relative' }}>
+                            <span style={{ position: 'absolute', left: 0 }}>・</span>{note}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
 
                     {/* タグ */}
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.25rem' }}>
