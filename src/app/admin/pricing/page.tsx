@@ -87,7 +87,7 @@ export default function AdminPricingPage() {
             <h2 style={formTitle}>{isNew ? '新規サービス追加' : 'サービス編集'}</h2>
             <ImageUpload
               label="サービス画像"
-              currentUrl={form.image}
+              currentUrl={form.image ?? ''}
               onUploaded={url => setForm(f => ({ ...f, image: url }))}
             />
             <FormField label="サービス名" value={form.name} onChange={v => setForm(f => ({ ...f, name: v }))} />
