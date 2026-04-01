@@ -60,24 +60,6 @@
       "href": "/services/seminar",
       "image": "/images/service-seminar.png",
       "published": true
-    },
-    {
-      "label": "test",
-      "num": "",
-      "name": "test",
-      "price": 0,
-      "priceLabel": "5000",
-      "priceNote": "",
-      "description": "test",
-      "notes": [
-        "test"
-      ],
-      "tags": [
-        "test"
-      ],
-      "href": "",
-      "published": true,
-      "id": "plan-1775024500364"
     }
   ]
 }
