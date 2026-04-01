@@ -8,6 +8,15 @@
       "published": true,
       "type": "news",
       "linkUrl": ""
+    },
+    {
+      "title": "test",
+      "body": "test",
+      "publishedAt": "2026-04-01",
+      "published": true,
+      "type": "news",
+      "linkUrl": "",
+      "id": "post-1775029806038"
     }
   ]
 }
