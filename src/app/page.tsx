@@ -58,6 +58,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── News ──────────────────────────── */}
+      <NewsSection />
+
       {/* ── Why (選ばれる3つの理由) ────────────── */}
       <section className="section section--warm">
         <div className="container">
@@ -114,9 +117,6 @@ export default function HomePage() {
           </FadeIn>
         </div>
       </section>
-
-      {/* ── News ──────────────────────────── */}
-      <NewsSection />
 
       {/* ── Quiz Banner ────────────────────── */}
       <section className="section section--warm">
