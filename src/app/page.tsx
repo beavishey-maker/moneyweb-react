@@ -6,43 +6,11 @@ import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { ArrowRight, Instagram } from 'lucide-react';
 import InstagramFeed from '@/components/InstagramFeed';
+import siteData from '@/data/site.json';
 
-/* ── データ ─────────────────────────────────────── */
-const WHY_CARDS = [
-  { num: '01', title: '初回30分\n完全無料', desc: '初回のご相談は30分・完全無料です。まずは気軽にお話しください。相談するかどうかのご判断は相談後で構いません。' },
-  { num: '02', title: 'オンライン・\n対面どちらも対応', desc: 'オンライン（全国対応）と対面（宮城県内・お客様ご指定の場所）どちらにも対応しています。' },
-  { num: '03', title: '中立的な\nアドバイス', desc: '特定の金融商品の販売は一切しません。あなたの利益を最優先した、公正で中立なアドバイスを提供します。' },
-];
-
-const SERVICES = [
-  {
-    num: '01',
-    title: '家計整理アドバイザー\n2級講座',
-    desc: '計算が苦手でも大丈夫。「お金の道を整える」というまったく新しいアプローチで、一生使えるスキルを身につけます。',
-    href: '/services#course',
-    badge: '資格取得',
-    comingSoon: false,
-  },
-  {
-    num: '02',
-    title: '家計×キャリア\n個別相談',
-    desc: 'お金と働き方を同時に整理する、完全オーダーメイドのセッション。漠然としたモヤモヤが、具体的な一歩に変わります。',
-    href: '/services#consultation',
-    badge: '初回30分・無料',
-    comingSoon: false,
-  },
-  {
-    num: '03',
-    title: '進学マネー\nセミナー',
-    desc: '中学・高校・大学の進学費用を「見える化」。奨学金・教育ローンの賢い使い方まで、具体的な資金計画を一緒に作ります。',
-    href: '/services',
-    badge: 'グループ受講',
-    comingSoon: true,
-  },
-];
-
-/* ── ページ ───────────────────────────────────── */
 export default function HomePage() {
+  const { hero, whyCards, topServices } = siteData;
+
   return (
     <main>
 
@@ -50,17 +18,15 @@ export default function HomePage() {
       <section className="hero">
         <div className="hero__content">
           <div className="hero__eyebrow">
-            <span className="label-en">Financial Planner</span>
+            <span className="label-en">{hero.eyebrow}</span>
           </div>
           <h1 className="hero__title">
-            あなたの未来に、<br />
-            <em>寄り添う</em><br />
-            お金の<br />
-            パートナー
+            {hero.titleLine1}<br />
+            <em>{hero.titleEmphasis}</em><br />
+            {hero.titleLine2}
           </h1>
-          <p className="hero__sub">
-            大切な家族の未来のために、今できることを。<br />
-            あなたらしい未来を、一緒に描きましょう。
+          <p className="hero__sub" style={{ whiteSpace: 'pre-line' }}>
+            {hero.subtitle}
           </p>
           <div className="hero__actions">
             <Link href="/contact" className="btn btn--primary btn--lg">
@@ -102,7 +68,7 @@ export default function HomePage() {
             />
           </FadeIn>
           <div className="why-grid">
-            {WHY_CARDS.map((c, i) => (
+            {whyCards.map((c, i) => (
               <FadeIn key={c.num} delay={i * 100}>
                 <div className="why-card">
                   <div className="why-card__num">{c.num}</div>
@@ -123,7 +89,7 @@ export default function HomePage() {
           </FadeIn>
           <FadeIn delay={100}>
             <div className="service-list">
-              {SERVICES.map((s) => (
+              {topServices.map((s) => (
                 <div key={s.num} className={`service-item${s.comingSoon ? ' coming-soon-overlay' : ''}`}>
                   <div className="service-item__body">
                     <span className="service-item__num">{s.num}</span>

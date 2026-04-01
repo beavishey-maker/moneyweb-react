@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { checkAuth } from '../_auth'
 import { cmsRead, cmsWrite } from '../_github'
 
-const FILE = 'src/data/profile.json'
+const FILE = 'src/data/site.json'
 
 export async function GET(req: NextRequest) {
   if (!checkAuth(req)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

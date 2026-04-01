@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 const SECTIONS = [
+  { href: '/admin/site', label: 'サイト設定', desc: 'ヒーロー文章・選ばれる理由・トップのサービス一覧' },
+  { href: '/admin/pricing', label: 'サービス詳細', desc: 'サービスページの料金・説明・タグの編集' },
   { href: '/admin/seminars', label: 'セミナー', desc: '開催情報の追加・編集・削除' },
-  { href: '/admin/pricing', label: '料金プラン', desc: 'サービス料金の追加・編集・削除' },
   { href: '/admin/testimonials', label: 'お客様の声', desc: '口コミの追加・編集・公開管理' },
   { href: '/admin/news', label: 'お知らせ', desc: 'ニュースの追加・編集・削除' },
   { href: '/admin/profile', label: 'プロフィール', desc: 'プロフィール情報の編集' },

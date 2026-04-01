@@ -2,45 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
-
-const SERVICES = [
-  {
-    num: '01',
-    label: 'Course',
-    title: '家計整理アドバイザー\n2級講座',
-    desc: '計算が苦手でも大丈夫。「お金の道を整える」独自メソッドで家計を自分でコントロールできるようになります。資格取得を通じて、一生使えるスキルを身につけましょう。',
-    notes: ['全2回のコース', '毎週木曜日・日曜日開催', '申し込み期日：開催1週間前まで（テキスト郵送のため）'],
-    price: '¥32,780（税込）',
-    priceNote: 'テキスト・受験料込み',
-    img: '/images/service-course.png',
-    href: '/services/course',
-    tags: ['マンツーマン指導', 'オンライン全国対応', '資格取得'],
-  },
-  {
-    num: '02',
-    label: 'Consultation',
-    title: '家計×キャリア\n個別相談',
-    desc: 'お金と働き方を同時に整理する、完全オーダーメイドのセッション。扶養の壁・老後資金・キャリアの方向性など、漠然としたモヤモヤを具体的な一歩に変えます。',
-    price: '¥5,500〜（税込）',
-    priceNote: '単発60分〜｜包括コースあり',
-    img: '/images/service-consultation.png',
-    href: '/services/consultation',
-    tags: ['FP×キャリア', 'オンライン全国対応', 'ライフプラン'],
-  },
-  {
-    num: '03',
-    label: 'Seminar',
-    title: '進学マネー\nセミナー',
-    desc: '中学・高校・大学の教育費を「見える化」するグループセミナー。奨学金・教育ローンの賢い使い方から、老後資金と両立する貯蓄計画まで、具体的に学べます。',
-    price: '¥1,000（税込）',
-    priceNote: 'お一人様｜少人数制・約2時間',
-    img: '/images/service-seminar.png',
-    href: '/services/seminar',
-    tags: ['少人数制', 'オンライン・対面', '教育費対策'],
-  },
-];
+import pricingData from '@/data/pricing.json';
 
 export default function ServicesPage() {
+  const services = pricingData.plans.filter(p => p.published);
+
   return (
     <>
       {/* HERO */}
@@ -55,8 +21,8 @@ export default function ServicesPage() {
         {/* サービス3枚カード */}
         <section className="section">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
-            {SERVICES.map((svc, i) => (
-              <FadeIn key={i} delay={i * 80}>
+            {services.map((svc, i) => (
+              <FadeIn key={svc.id} delay={i * 80}>
                 <div style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -66,8 +32,8 @@ export default function ServicesPage() {
                   {/* 画像 */}
                   <div style={{ borderRadius: '20px', overflow: 'hidden', aspectRatio: '16/10' }}>
                     <Image
-                      src={svc.img}
-                      alt={svc.title.replace('\n', '')}
+                      src={`/images/service-${svc.label?.toLowerCase() ?? svc.id}.png`}
+                      alt={svc.name.replace('\n', '')}
                       width={600}
                       height={375}
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -80,14 +46,14 @@ export default function ServicesPage() {
                       {svc.label}
                     </span>
                     <h2 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: '300', lineHeight: '1.5', marginBottom: '1rem', whiteSpace: 'pre-line' }}>
-                      {svc.title}
+                      {svc.name}
                     </h2>
-                    <p style={{ fontSize: 'var(--text-sm)', fontWeight: '300', lineHeight: '2', color: 'var(--col-muted)', marginBottom: svc.notes ? '0.75rem' : '1.25rem' }}>
-                      {svc.desc}
+                    <p style={{ fontSize: 'var(--text-sm)', fontWeight: '300', lineHeight: '2', color: 'var(--col-muted)', marginBottom: svc.notes?.length ? '0.75rem' : '1.25rem' }}>
+                      {svc.description}
                     </p>
 
                     {/* コース詳細（任意） */}
-                    {svc.notes && (
+                    {svc.notes && svc.notes.length > 0 && (
                       <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
                         {svc.notes.map((note) => (
                           <li key={note} style={{ fontSize: 'var(--text-sm)', fontWeight: '300', color: 'var(--col-muted)', paddingLeft: '1em', position: 'relative' }}>
@@ -98,11 +64,13 @@ export default function ServicesPage() {
                     )}
 
                     {/* タグ */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.25rem' }}>
-                      {svc.tags.map((tag) => (
-                        <span key={tag} className="tag">{tag}</span>
-                      ))}
-                    </div>
+                    {svc.tags && (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.25rem' }}>
+                        {svc.tags.map((tag) => (
+                          <span key={tag} className="tag">{tag}</span>
+                        ))}
+                      </div>
+                    )}
 
                     {/* 料金 */}
                     <div style={{
@@ -115,7 +83,7 @@ export default function ServicesPage() {
                       alignItems: 'baseline',
                       gap: '0.75rem',
                     }}>
-                      <span style={{ fontSize: '1.25rem', fontFamily: "'Cormorant Garamond', serif", fontWeight: '400', color: 'var(--col-body)' }}>{svc.price}</span>
+                      <span style={{ fontSize: '1.25rem', fontFamily: "'Cormorant Garamond', serif", fontWeight: '400', color: 'var(--col-body)' }}>{svc.priceLabel}</span>
                       <span style={{ fontSize: '0.8rem', color: 'var(--col-muted)', fontWeight: '300' }}>{svc.priceNote}</span>
                     </div>
 
