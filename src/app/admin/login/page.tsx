@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [token, setToken] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -14,14 +14,17 @@ export default function AdminLoginPage() {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('/api/cms/profile', {
-        headers: { Authorization: `Bearer ${token}` },
+      const res = await fetch('/api/cms/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
       })
       if (res.ok) {
+        const { token } = await res.json()
         sessionStorage.setItem('cms_token', token)
         router.push('/admin')
       } else {
-        setError('トークンが正しくありません。')
+        setError('パスワードが正しくありません。')
       }
     } catch {
       setError('接続に失敗しました。')
@@ -56,13 +59,14 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleSubmit}>
           <label style={{ display: 'block', fontSize: '0.85rem', color: '#555', marginBottom: '0.5rem' }}>
-            アクセストークン
+            パスワード
           </label>
           <input
             type="password"
-            value={token}
-            onChange={e => setToken(e.target.value)}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             required
+            autoFocus
             style={{
               width: '100%',
               padding: '0.75rem 1rem',
