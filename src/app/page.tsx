@@ -6,6 +6,7 @@ import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { ArrowRight, Instagram } from 'lucide-react';
 import InstagramFeed from '@/components/InstagramFeed';
+import NewsSection from '@/components/NewsSection';
 import siteData from '@/data/site.json';
 
 export default function HomePage() {
@@ -113,6 +114,9 @@ export default function HomePage() {
           </FadeIn>
         </div>
       </section>
+
+      {/* ── News ──────────────────────────── */}
+      <NewsSection />
 
       {/* ── Quiz Banner ────────────────────── */}
       <section className="section section--warm">

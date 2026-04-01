@@ -6,10 +6,10 @@ import Link from 'next/link'
 import { cmsPost, cmsPut, cmsDelete } from '../_lib/api'
 import defaultData from '@/data/news.json'
 
-type Post = (typeof defaultData.posts)[number]
+type Post = (typeof defaultData.posts)[number] & { type: string; linkUrl: string }
 
 const EMPTY: Omit<Post, 'id'> = {
-  title: '', body: '', publishedAt: new Date().toISOString().slice(0, 10), published: true,
+  title: '', body: '', publishedAt: new Date().toISOString().slice(0, 10), published: true, type: 'news', linkUrl: '',
 }
 
 export default function AdminNewsPage() {
@@ -32,7 +32,7 @@ export default function AdminNewsPage() {
 
   function startEdit(item: Post) {
     setEditing(item)
-    setForm({ title: item.title, body: item.body, publishedAt: item.publishedAt, published: item.published })
+    setForm({ title: item.title, body: item.body, publishedAt: item.publishedAt, published: item.published, type: (item as Post).type ?? 'news', linkUrl: (item as Post).linkUrl ?? '' })
     setIsNew(false)
   }
 
@@ -78,8 +78,16 @@ export default function AdminNewsPage() {
         {showForm && (
           <div style={formCard}>
             <h2 style={formTitle}>{isNew ? '新規お知らせ追加' : '編集'}</h2>
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={labelStyle}>種別</label>
+              <select value={(form as Post).type ?? 'news'} onChange={e => setForm(f => ({ ...f, type: e.target.value }))} style={inputStyle as React.CSSProperties}>
+                <option value="news">お知らせ</option>
+                <option value="seminar">セミナー</option>
+              </select>
+            </div>
             <FormField label="タイトル" value={form.title} onChange={v => setForm(f => ({ ...f, title: v }))} />
             <FormField label="公開日" value={form.publishedAt} onChange={v => setForm(f => ({ ...f, publishedAt: v }))} type="date" />
+            <FormField label="リンクURL（任意）" value={(form as Post).linkUrl ?? ''} onChange={v => setForm(f => ({ ...f, linkUrl: v }))} />
             <div style={{ marginBottom: '1rem' }}>
               <label style={labelStyle}>本文</label>
               <textarea value={form.body} onChange={e => setForm(f => ({ ...f, body: e.target.value }))} rows={5} style={{ ...inputStyle, resize: 'vertical' } as React.CSSProperties} />
@@ -101,6 +109,9 @@ export default function AdminNewsPage() {
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.25rem' }}>
                   <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: '400' }}>{item.title}</p>
+                  <span style={{ fontSize: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '20px', background: (item as Post).type === 'seminar' ? '#e8f5ee' : '#fdf0e8', color: (item as Post).type === 'seminar' ? '#2d7a4f' : '#C4724A' }}>
+                    {(item as Post).type === 'seminar' ? 'セミナー' : 'お知らせ'}
+                  </span>
                   <span style={{ fontSize: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '20px', background: item.published ? '#e8f5ee' : '#f5f5f5', color: item.published ? '#2d7a4f' : '#888' }}>
                     {item.published ? '公開中' : '非公開'}
                   </span>
