@@ -3,15 +3,10 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { cmsGet, cmsPost, cmsPut, cmsDelete } from '../_lib/api'
+import { cmsPost, cmsPut, cmsDelete } from '../_lib/api'
+import defaultData from '@/data/news.json'
 
-type Post = {
-  id: string
-  title: string
-  body: string
-  publishedAt: string
-  published: boolean
-}
+type Post = (typeof defaultData.posts)[number]
 
 const EMPTY: Omit<Post, 'id'> = {
   title: '', body: '', publishedAt: new Date().toISOString().slice(0, 10), published: true,
@@ -19,25 +14,21 @@ const EMPTY: Omit<Post, 'id'> = {
 
 export default function AdminNewsPage() {
   const router = useRouter()
-  const [items, setItems] = useState<Post[]>([])
+  const [items, setItems] = useState<Post[]>(defaultData.posts)
   const [editing, setEditing] = useState<Post | null>(null)
   const [form, setForm] = useState<Omit<Post, 'id'>>(EMPTY)
   const [msg, setMsg] = useState('')
   const [isNew, setIsNew] = useState(false)
 
   useEffect(() => {
-    if (!sessionStorage.getItem('cms_token')) { router.replace('/admin/login'); return }
-    load()
+    if (!sessionStorage.getItem('cms_token')) router.replace('/admin/login')
   }, [router])
 
-  async function load() {
-    try {
-      const data = await cmsGet('news')
-      setItems(data.posts)
-    } catch { setMsg('読み込みに失敗しました') }
+  function startNew() {
+    setEditing(null)
+    setForm({ ...EMPTY, publishedAt: new Date().toISOString().slice(0, 10) })
+    setIsNew(true)
   }
-
-  function startNew() { setEditing(null); setForm({ ...EMPTY, publishedAt: new Date().toISOString().slice(0, 10) }); setIsNew(true) }
 
   function startEdit(item: Post) {
     setEditing(item)
@@ -50,24 +41,25 @@ export default function AdminNewsPage() {
   async function save() {
     try {
       if (isNew) {
-        await cmsPost('news', form)
-        setMsg('追加しました')
+        const newItem = await cmsPost('news', form)
+        setItems(prev => [...prev, newItem])
+        setMsg('追加しました。サイトは1〜2分後に反映されます。')
       } else if (editing) {
-        await cmsPut('news', { ...form, id: editing.id })
-        setMsg('更新しました')
+        const updated = await cmsPut('news', { ...form, id: editing.id })
+        setItems(prev => prev.map(p => p.id === editing.id ? updated : p))
+        setMsg('更新しました。サイトは1〜2分後に反映されます。')
       }
       setEditing(null); setIsNew(false)
-      await load()
-    } catch { setMsg('保存に失敗しました') }
+    } catch { setMsg('保存に失敗しました。GITHUB_TOKENが設定されているか確認してください。') }
   }
 
   async function remove(id: string) {
     if (!confirm('削除しますか？')) return
     try {
       await cmsDelete('news', id)
-      setMsg('削除しました')
-      await load()
-    } catch { setMsg('削除に失敗しました') }
+      setItems(prev => prev.filter(p => p.id !== id))
+      setMsg('削除しました。')
+    } catch { setMsg('削除に失敗しました。') }
   }
 
   const showForm = isNew || editing !== null
@@ -80,12 +72,7 @@ export default function AdminNewsPage() {
           <h1 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.5rem', fontWeight: '300', color: '#2d2d2d' }}>お知らせ管理</h1>
         </div>
 
-        {msg && (
-          <div style={{ padding: '0.75rem 1rem', background: '#f0faf4', border: '1px solid #a8d5b5', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', color: '#2d7a4f' }}>
-            {msg} <button onClick={() => setMsg('')} style={{ marginLeft: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>×</button>
-          </div>
-        )}
-
+        {msg && <Msg text={msg} onClose={() => setMsg('')} />}
         {!showForm && <button onClick={startNew} style={btnPrimary}>＋ 新規追加</button>}
 
         {showForm && (
@@ -138,6 +125,15 @@ function FormField({ label, value, onChange, type = 'text' }: { label: string; v
     <div style={{ marginBottom: '1rem' }}>
       <label style={labelStyle}>{label}</label>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} style={inputStyle as React.CSSProperties} />
+    </div>
+  )
+}
+
+function Msg({ text, onClose }: { text: string; onClose: () => void }) {
+  const isErr = text.includes('失敗')
+  return (
+    <div style={{ padding: '0.75rem 1rem', background: isErr ? '#fdf0f0' : '#f0faf4', border: `1px solid ${isErr ? '#e0a0a0' : '#a8d5b5'}`, borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', color: isErr ? '#c0392b' : '#2d7a4f' }}>
+      {text} <button onClick={onClose} style={{ marginLeft: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>×</button>
     </div>
   )
 }

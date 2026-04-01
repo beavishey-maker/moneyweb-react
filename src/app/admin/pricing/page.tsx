@@ -3,51 +3,39 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { cmsGet, cmsPost, cmsPut, cmsDelete } from '../_lib/api'
+import { cmsPost, cmsPut, cmsDelete } from '../_lib/api'
+import defaultData from '@/data/pricing.json'
 
-type Plan = {
-  id: string
-  name: string
-  priceLabel: string
-  priceNote: string
-  description: string
-  tags: string[]
-  published: boolean
-}
+type Plan = (typeof defaultData.plans)[number]
 
 const EMPTY: Omit<Plan, 'id'> = {
-  name: '', priceLabel: '', priceNote: '', description: '', tags: [], published: true,
+  label: '', num: '', name: '', price: 0, priceLabel: '', priceNote: '',
+  description: '', notes: [], tags: [], href: '', published: true,
 }
 
 export default function AdminPricingPage() {
   const router = useRouter()
-  const [items, setItems] = useState<Plan[]>([])
+  const [items, setItems] = useState<Plan[]>(defaultData.plans)
   const [editing, setEditing] = useState<Plan | null>(null)
   const [form, setForm] = useState<Omit<Plan, 'id'>>(EMPTY)
   const [tagsStr, setTagsStr] = useState('')
+  const [notesStr, setNotesStr] = useState('')
   const [msg, setMsg] = useState('')
   const [isNew, setIsNew] = useState(false)
 
   useEffect(() => {
-    if (!sessionStorage.getItem('cms_token')) { router.replace('/admin/login'); return }
-    load()
+    if (!sessionStorage.getItem('cms_token')) router.replace('/admin/login')
   }, [router])
 
-  async function load() {
-    try {
-      const data = await cmsGet('pricing')
-      setItems(data.plans)
-    } catch { setMsg('読み込みに失敗しました') }
-  }
-
   function startNew() {
-    setEditing(null); setForm(EMPTY); setTagsStr(''); setIsNew(true)
+    setEditing(null); setForm(EMPTY); setTagsStr(''); setNotesStr(''); setIsNew(true)
   }
 
   function startEdit(item: Plan) {
     setEditing(item)
-    setForm({ name: item.name, priceLabel: item.priceLabel, priceNote: item.priceNote, description: item.description, tags: item.tags, published: item.published })
+    setForm({ label: item.label, num: item.num, name: item.name, price: item.price, priceLabel: item.priceLabel, priceNote: item.priceNote, description: item.description, notes: item.notes, tags: item.tags, href: item.href, published: item.published })
     setTagsStr(item.tags.join('、'))
+    setNotesStr(item.notes.join('\n'))
     setIsNew(false)
   }
 
@@ -56,26 +44,28 @@ export default function AdminPricingPage() {
   async function save() {
     try {
       const tags = tagsStr.split(/[、,]/).map(s => s.trim()).filter(Boolean)
-      const payload = { ...form, tags }
+      const notes = notesStr.split('\n').map(s => s.trim()).filter(Boolean)
+      const payload = { ...form, tags, notes }
       if (isNew) {
-        await cmsPost('pricing', payload)
-        setMsg('追加しました')
+        const newItem = await cmsPost('pricing', payload)
+        setItems(prev => [...prev, newItem])
+        setMsg('追加しました。サイトは1〜2分後に反映されます。')
       } else if (editing) {
-        await cmsPut('pricing', { ...payload, id: editing.id })
-        setMsg('更新しました')
+        const updated = await cmsPut('pricing', { ...payload, id: editing.id })
+        setItems(prev => prev.map(p => p.id === editing.id ? updated : p))
+        setMsg('更新しました。サイトは1〜2分後に反映されます。')
       }
       setEditing(null); setIsNew(false)
-      await load()
-    } catch { setMsg('保存に失敗しました') }
+    } catch { setMsg('保存に失敗しました。GITHUB_TOKENが設定されているか確認してください。') }
   }
 
   async function remove(id: string) {
     if (!confirm('削除しますか？')) return
     try {
       await cmsDelete('pricing', id)
-      setMsg('削除しました')
-      await load()
-    } catch { setMsg('削除に失敗しました') }
+      setItems(prev => prev.filter(p => p.id !== id))
+      setMsg('削除しました。')
+    } catch { setMsg('削除に失敗しました。') }
   }
 
   const showForm = isNew || editing !== null
@@ -85,31 +75,32 @@ export default function AdminPricingPage() {
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
           <Link href="/admin" style={{ fontSize: '0.85rem', color: '#888', textDecoration: 'none' }}>← ダッシュボード</Link>
-          <h1 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.5rem', fontWeight: '300', color: '#2d2d2d' }}>料金プラン管理</h1>
+          <h1 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.5rem', fontWeight: '300', color: '#2d2d2d' }}>サービス詳細管理</h1>
         </div>
 
-        {msg && (
-          <div style={{ padding: '0.75rem 1rem', background: '#f0faf4', border: '1px solid #a8d5b5', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', color: '#2d7a4f' }}>
-            {msg} <button onClick={() => setMsg('')} style={{ marginLeft: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>×</button>
-          </div>
-        )}
-
+        {msg && <Msg text={msg} onClose={() => setMsg('')} />}
         {!showForm && <button onClick={startNew} style={btnPrimary}>＋ 新規追加</button>}
 
         {showForm && (
           <div style={formCard}>
-            <h2 style={formTitle}>{isNew ? '新規プラン追加' : 'プラン編集'}</h2>
+            <h2 style={formTitle}>{isNew ? '新規サービス追加' : 'サービス編集'}</h2>
             <FormField label="サービス名" value={form.name} onChange={v => setForm(f => ({ ...f, name: v }))} />
+            <FormField label="英語ラベル（例: Course）" value={form.label} onChange={v => setForm(f => ({ ...f, label: v }))} />
             <FormField label="料金表示（例: ¥5,500〜（税込））" value={form.priceLabel} onChange={v => setForm(f => ({ ...f, priceLabel: v }))} />
             <FormField label="料金補足（例: 単発60分〜）" value={form.priceNote} onChange={v => setForm(f => ({ ...f, priceNote: v }))} />
             <div style={{ marginBottom: '1rem' }}>
               <label style={labelStyle}>説明</label>
               <textarea value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={3} style={{ ...inputStyle, resize: 'vertical' } as React.CSSProperties} />
             </div>
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={labelStyle}>詳細（1行ごとに箇条書き）</label>
+              <textarea value={notesStr} onChange={e => setNotesStr(e.target.value)} rows={3} style={{ ...inputStyle, resize: 'vertical' } as React.CSSProperties} />
+            </div>
             <FormField label="タグ（読点区切り）" value={tagsStr} onChange={setTagsStr} placeholder="例: マンツーマン指導、オンライン全国対応" />
+            <FormField label="リンク先（例: /services/course）" value={form.href} onChange={v => setForm(f => ({ ...f, href: v }))} />
             <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <input type="checkbox" id="pub" checked={form.published} onChange={e => setForm(f => ({ ...f, published: e.target.checked }))} />
-              <label htmlFor="pub" style={{ fontSize: '0.85rem', color: '#555' }}>公開する</label>
+              <label htmlFor="pub" style={{ fontSize: '0.85rem', color: '#555' }}>サービスページに表示する</label>
             </div>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
               <button onClick={save} style={btnPrimary}>保存</button>
@@ -123,7 +114,7 @@ export default function AdminPricingPage() {
             <div key={item.id} style={itemCard}>
               <div style={{ flex: 1 }}>
                 <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: '400', marginBottom: '0.25rem' }}>{item.name}</p>
-                <p style={{ fontSize: '0.85rem', color: '#C4724A', fontWeight: '400' }}>{item.priceLabel}</p>
+                <p style={{ fontSize: '0.85rem', color: '#C4724A' }}>{item.priceLabel}</p>
                 <p style={{ fontSize: '0.8rem', color: '#888' }}>{item.priceNote}</p>
               </div>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -143,6 +134,15 @@ function FormField({ label, value, onChange, placeholder = '' }: { label: string
     <div style={{ marginBottom: '1rem' }}>
       <label style={labelStyle}>{label}</label>
       <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} style={inputStyle as React.CSSProperties} />
+    </div>
+  )
+}
+
+function Msg({ text, onClose }: { text: string; onClose: () => void }) {
+  const isErr = text.includes('失敗')
+  return (
+    <div style={{ padding: '0.75rem 1rem', background: isErr ? '#fdf0f0' : '#f0faf4', border: `1px solid ${isErr ? '#e0a0a0' : '#a8d5b5'}`, borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', color: isErr ? '#c0392b' : '#2d7a4f' }}>
+      {text} <button onClick={onClose} style={{ marginLeft: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>×</button>
     </div>
   )
 }

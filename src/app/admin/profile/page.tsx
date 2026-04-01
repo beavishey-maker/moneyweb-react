@@ -3,38 +3,32 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { cmsGet, cmsPut } from '../_lib/api'
-
-type Profile = {
-  name: string
-  title: string
-  bio: string
-  qualifications: string[]
-  area: string
-}
+import { cmsPut } from '../_lib/api'
+import defaultData from '@/data/profile.json'
 
 export default function AdminProfilePage() {
   const router = useRouter()
-  const [form, setForm] = useState<Profile>({ name: '', title: '', bio: '', qualifications: [], area: '' })
-  const [qualsStr, setQualsStr] = useState('')
+  const [form, setForm] = useState(defaultData)
+  const [qualsStr, setQualsStr] = useState(defaultData.qualifications.join('\n'))
   const [msg, setMsg] = useState('')
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    if (!sessionStorage.getItem('cms_token')) { router.replace('/admin/login'); return }
-    cmsGet('profile').then(data => {
-      setForm(data)
-      setQualsStr((data.qualifications as string[]).join('\n'))
-    }).catch(() => setMsg('読み込みに失敗しました'))
+    if (!sessionStorage.getItem('cms_token')) router.replace('/admin/login')
   }, [router])
 
   async function save(e: React.FormEvent) {
     e.preventDefault()
+    setSaving(true)
     try {
       const qualifications = qualsStr.split('\n').map(s => s.trim()).filter(Boolean)
       await cmsPut('profile', { ...form, qualifications })
-      setMsg('保存しました')
-    } catch { setMsg('保存に失敗しました') }
+      setMsg('保存しました。サイトは1〜2分後に反映されます。')
+    } catch { setMsg('保存に失敗しました。GITHUB_TOKENが設定されているか確認してください。') }
+    finally { setSaving(false) }
   }
+
+  const isErr = msg.includes('失敗')
 
   return (
     <div style={{ minHeight: '100vh', background: '#faf8f5', padding: '2rem' }}>
@@ -45,7 +39,7 @@ export default function AdminProfilePage() {
         </div>
 
         {msg && (
-          <div style={{ padding: '0.75rem 1rem', background: '#f0faf4', border: '1px solid #a8d5b5', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', color: '#2d7a4f' }}>
+          <div style={{ padding: '0.75rem 1rem', background: isErr ? '#fdf0f0' : '#f0faf4', border: `1px solid ${isErr ? '#e0a0a0' : '#a8d5b5'}`, borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', color: isErr ? '#c0392b' : '#2d7a4f' }}>
             {msg} <button onClick={() => setMsg('')} style={{ marginLeft: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>×</button>
           </div>
         )}
@@ -71,7 +65,9 @@ export default function AdminProfilePage() {
             <label style={labelStyle}>資格・認定（1行に1つ）</label>
             <textarea value={qualsStr} onChange={e => setQualsStr(e.target.value)} rows={6} style={{ ...inputStyle, resize: 'vertical' } as React.CSSProperties} />
           </div>
-          <button type="submit" style={btnPrimary}>保存</button>
+          <button type="submit" disabled={saving} style={btnPrimary}>
+            {saving ? '保存中…' : '保存する'}
+          </button>
         </form>
       </div>
     </div>

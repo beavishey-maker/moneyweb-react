@@ -3,20 +3,10 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { cmsGet, cmsPost, cmsPut, cmsDelete } from '../_lib/api'
+import { cmsPost, cmsPut, cmsDelete } from '../_lib/api'
+import defaultData from '@/data/seminars.json'
 
-type Seminar = {
-  id: string
-  title: string
-  date: string
-  time: string
-  location: string
-  capacity: number
-  currentEnrollment: number
-  status: string
-  description: string
-  price: number
-}
+type Seminar = (typeof defaultData.seminars)[number]
 
 const EMPTY: Omit<Seminar, 'id'> = {
   title: '', date: '', time: '', location: '', capacity: 10,
@@ -25,29 +15,17 @@ const EMPTY: Omit<Seminar, 'id'> = {
 
 export default function AdminSeminarsPage() {
   const router = useRouter()
-  const [items, setItems] = useState<Seminar[]>([])
+  const [items, setItems] = useState<Seminar[]>(defaultData.seminars)
   const [editing, setEditing] = useState<Seminar | null>(null)
   const [form, setForm] = useState<Omit<Seminar, 'id'>>(EMPTY)
   const [msg, setMsg] = useState('')
   const [isNew, setIsNew] = useState(false)
 
   useEffect(() => {
-    if (!sessionStorage.getItem('cms_token')) { router.replace('/admin/login'); return }
-    load()
+    if (!sessionStorage.getItem('cms_token')) router.replace('/admin/login')
   }, [router])
 
-  async function load() {
-    try {
-      const data = await cmsGet('seminars')
-      setItems(data.seminars)
-    } catch { setMsg('読み込みに失敗しました') }
-  }
-
-  function startNew() {
-    setEditing(null)
-    setForm(EMPTY)
-    setIsNew(true)
-  }
+  function startNew() { setEditing(null); setForm(EMPTY); setIsNew(true) }
 
   function startEdit(item: Seminar) {
     setEditing(item)
@@ -60,24 +38,25 @@ export default function AdminSeminarsPage() {
   async function save() {
     try {
       if (isNew) {
-        await cmsPost('seminars', form)
-        setMsg('追加しました')
+        const newItem = await cmsPost('seminars', form)
+        setItems(prev => [...prev, newItem])
+        setMsg('追加しました。サイトは1〜2分後に反映されます。')
       } else if (editing) {
-        await cmsPut('seminars', { ...form, id: editing.id })
-        setMsg('更新しました')
+        const updated = await cmsPut('seminars', { ...form, id: editing.id })
+        setItems(prev => prev.map(s => s.id === editing.id ? updated : s))
+        setMsg('更新しました。サイトは1〜2分後に反映されます。')
       }
       setEditing(null); setIsNew(false)
-      await load()
-    } catch { setMsg('保存に失敗しました') }
+    } catch { setMsg('保存に失敗しました。GITHUB_TOKENが設定されているか確認してください。') }
   }
 
   async function remove(id: string) {
     if (!confirm('削除しますか？')) return
     try {
       await cmsDelete('seminars', id)
-      setMsg('削除しました')
-      await load()
-    } catch { setMsg('削除に失敗しました') }
+      setItems(prev => prev.filter(s => s.id !== id))
+      setMsg('削除しました。')
+    } catch { setMsg('削除に失敗しました。') }
   }
 
   const showForm = isNew || editing !== null
@@ -90,22 +69,15 @@ export default function AdminSeminarsPage() {
           <h1 style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '1.5rem', fontWeight: '300', color: '#2d2d2d' }}>セミナー管理</h1>
         </div>
 
-        {msg && (
-          <div style={{ padding: '0.75rem 1rem', background: '#f0faf4', border: '1px solid #a8d5b5', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', color: '#2d7a4f' }}>
-            {msg} <button onClick={() => setMsg('')} style={{ marginLeft: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>×</button>
-          </div>
-        )}
-
-        {!showForm && (
-          <button onClick={startNew} style={btnPrimary}>＋ 新規追加</button>
-        )}
+        {msg && <Msg text={msg} onClose={() => setMsg('')} />}
+        {!showForm && <button onClick={startNew} style={btnPrimary}>＋ 新規追加</button>}
 
         {showForm && (
           <div style={formCard}>
             <h2 style={formTitle}>{isNew ? '新規セミナー追加' : 'セミナー編集'}</h2>
             <FormField label="タイトル" value={form.title} onChange={v => setForm(f => ({ ...f, title: v }))} />
             <FormField label="日付" value={form.date} onChange={v => setForm(f => ({ ...f, date: v }))} type="date" />
-            <FormField label="時間" value={form.time} onChange={v => setForm(f => ({ ...f, time: v }))} placeholder="例: 10:00〜12:00" />
+            <FormField label="時間（例: 10:00〜12:00）" value={form.time} onChange={v => setForm(f => ({ ...f, time: v }))} />
             <FormField label="場所" value={form.location} onChange={v => setForm(f => ({ ...f, location: v }))} />
             <FormField label="定員" value={String(form.capacity)} onChange={v => setForm(f => ({ ...f, capacity: Number(v) }))} type="number" />
             <FormField label="現在の申込数" value={String(form.currentEnrollment)} onChange={v => setForm(f => ({ ...f, currentEnrollment: Number(v) }))} type="number" />
@@ -151,11 +123,20 @@ export default function AdminSeminarsPage() {
   )
 }
 
-function FormField({ label, value, onChange, type = 'text', placeholder = '' }: { label: string; value: string; onChange: (v: string) => void; type?: string; placeholder?: string }) {
+function FormField({ label, value, onChange, type = 'text' }: { label: string; value: string; onChange: (v: string) => void; type?: string }) {
   return (
     <div style={{ marginBottom: '1rem' }}>
       <label style={labelStyle}>{label}</label>
-      <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} style={inputStyle as React.CSSProperties} />
+      <input type={type} value={value} onChange={e => onChange(e.target.value)} style={inputStyle as React.CSSProperties} />
+    </div>
+  )
+}
+
+function Msg({ text, onClose }: { text: string; onClose: () => void }) {
+  const isErr = text.includes('失敗')
+  return (
+    <div style={{ padding: '0.75rem 1rem', background: isErr ? '#fdf0f0' : '#f0faf4', border: `1px solid ${isErr ? '#e0a0a0' : '#a8d5b5'}`, borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', color: isErr ? '#c0392b' : '#2d7a4f' }}>
+      {text} <button onClick={onClose} style={{ marginLeft: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#888' }}>×</button>
     </div>
   )
 }
