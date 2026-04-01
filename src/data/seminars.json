@@ -1,0 +1,16 @@
+{
+  "seminars": [
+    {
+      "id": "seminar-1",
+      "title": "進学マネーセミナー",
+      "date": "2025-06-01",
+      "time": "10:00〜12:00",
+      "location": "オンライン（Zoom）",
+      "capacity": 10,
+      "currentEnrollment": 0,
+      "status": "open",
+      "description": "中学・高校・大学の教育費を「見える化」するグループセミナー。奨学金・教育ローンの賢い使い方から、老後資金と両立する貯蓄計画まで、具体的に学べます。",
+      "price": 1000
+    }
+  ]
+}
