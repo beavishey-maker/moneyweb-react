@@ -20,6 +20,7 @@
         "資格取得"
       ],
       "href": "/services/course",
+      "image": "/images/service-course.png",
       "published": true
     },
     {
@@ -38,6 +39,7 @@
         "ライフプラン"
       ],
       "href": "/services/consultation",
+      "image": "/images/service-consultation.png",
       "published": true
     },
     {
@@ -56,6 +58,7 @@
         "教育費対策"
       ],
       "href": "/services/seminar",
+      "image": "/images/service-seminar.png",
       "published": true
     },
     {

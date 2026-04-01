@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { cmsPut } from '../_lib/api'
+import ImageUpload from '../_lib/ImageUpload'
 import defaultData from '@/data/site.json'
 
 type SiteData = typeof defaultData
@@ -68,6 +69,11 @@ export default function AdminSitePage() {
         )}
 
         <Section title="ヒーローセクション（トップページ上部）">
+          <ImageUpload
+            label="ヒーロー画像（右側の写真）"
+            currentUrl={data.hero.heroImage}
+            onUploaded={url => setData(d => ({ ...d, hero: { ...d.hero, heroImage: url } }))}
+          />
           <FormField label="eyebrow（小さい英語テキスト）" value={data.hero.eyebrow} onChange={v => updateHero('eyebrow', v)} />
           <FormField label="タイトル 1行目" value={data.hero.titleLine1} onChange={v => updateHero('titleLine1', v)} />
           <FormField label="強調テキスト（イタリック・中央行）" value={data.hero.titleEmphasis} onChange={v => updateHero('titleEmphasis', v)} />

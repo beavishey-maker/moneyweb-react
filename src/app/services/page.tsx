@@ -32,7 +32,7 @@ export default function ServicesPage() {
                   {/* 画像 */}
                   <div style={{ borderRadius: '20px', overflow: 'hidden', aspectRatio: '16/10' }}>
                     <Image
-                      src={`/images/service-${svc.label?.toLowerCase() ?? svc.id}.png`}
+                      src={svc.image || `/images/service-${svc.label?.toLowerCase() ?? svc.id}.png`}
                       alt={svc.name.replace('\n', '')}
                       width={600}
                       height={375}

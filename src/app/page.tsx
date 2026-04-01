@@ -46,7 +46,7 @@ export default function HomePage() {
         <div className="hero__image-side">
           <div className="hero__image-placeholder">
             <Image
-              src="/images/hero.webp"
+              src={hero.heroImage}
               alt="渡辺加奈子"
               fill
               style={{ objectFit: 'cover', objectPosition: '75% center' }}

@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { cmsPost, cmsPut, cmsDelete } from '../_lib/api'
+import ImageUpload from '../_lib/ImageUpload'
 import defaultData from '@/data/pricing.json'
 
 type Plan = (typeof defaultData.plans)[number]
 
 const EMPTY: Omit<Plan, 'id'> = {
   label: '', num: '', name: '', price: 0, priceLabel: '', priceNote: '',
-  description: '', notes: [], tags: [], href: '', published: true,
+  description: '', notes: [], tags: [], href: '', image: '', published: true,
 }
 
 export default function AdminPricingPage() {
@@ -33,7 +34,7 @@ export default function AdminPricingPage() {
 
   function startEdit(item: Plan) {
     setEditing(item)
-    setForm({ label: item.label, num: item.num, name: item.name, price: item.price, priceLabel: item.priceLabel, priceNote: item.priceNote, description: item.description, notes: item.notes, tags: item.tags, href: item.href, published: item.published })
+    setForm({ label: item.label, num: item.num, name: item.name, price: item.price, priceLabel: item.priceLabel, priceNote: item.priceNote, description: item.description, notes: item.notes, tags: item.tags, href: item.href, image: item.image, published: item.published })
     setTagsStr(item.tags.join('、'))
     setNotesStr(item.notes.join('\n'))
     setIsNew(false)
@@ -84,6 +85,11 @@ export default function AdminPricingPage() {
         {showForm && (
           <div style={formCard}>
             <h2 style={formTitle}>{isNew ? '新規サービス追加' : 'サービス編集'}</h2>
+            <ImageUpload
+              label="サービス画像"
+              currentUrl={form.image}
+              onUploaded={url => setForm(f => ({ ...f, image: url }))}
+            />
             <FormField label="サービス名" value={form.name} onChange={v => setForm(f => ({ ...f, name: v }))} />
             <FormField label="英語ラベル（例: Course）" value={form.label} onChange={v => setForm(f => ({ ...f, label: v }))} />
             <FormField label="料金表示（例: ¥5,500〜（税込））" value={form.priceLabel} onChange={v => setForm(f => ({ ...f, priceLabel: v }))} />

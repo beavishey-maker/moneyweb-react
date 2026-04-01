@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { cmsPut } from '../_lib/api'
+import ImageUpload from '../_lib/ImageUpload'
 import defaultData from '@/data/profile.json'
 
 export default function AdminProfilePage() {
@@ -45,6 +46,11 @@ export default function AdminProfilePage() {
         )}
 
         <form onSubmit={save} style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '16px', padding: '1.75rem' }}>
+          <ImageUpload
+            label="プロフィール画像"
+            currentUrl={form.profileImage}
+            onUploaded={url => setForm(f => ({ ...f, profileImage: url }))}
+          />
           <div style={{ marginBottom: '1rem' }}>
             <label style={labelStyle}>氏名</label>
             <input type="text" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} style={inputStyle as React.CSSProperties} />

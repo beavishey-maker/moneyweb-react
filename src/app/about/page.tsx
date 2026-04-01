@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
+import profileData from '@/data/profile.json';
 
 const TIMELINE = [
   {
@@ -66,7 +67,7 @@ export default function AboutPage() {
             <div className="profile-strip">
               <div className="profile-strip__photo-wrap">
                 <Image
-                  src="/images/DSC3587-1024x683.jpg"
+                  src={profileData.profileImage}
                   alt="渡辺加奈子"
                   width={200}
                   height={200}
