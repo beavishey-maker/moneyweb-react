@@ -3,6 +3,7 @@ import Image from 'next/image';
 import FadeIn from '@/components/ui/FadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
 import profileData from '@/data/profile.json';
+import siteData from '@/data/site.json';
 
 const TIMELINE = [
   {
@@ -181,12 +182,12 @@ export default function AboutPage() {
         <div className="container">
           <div className="cta-section">
             <FadeIn>
-              <span className="cta-section__eyebrow" style={{ color: 'var(--col-gold)' }}>Free Consultation</span>
-              <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>まずは、話してみませんか？</h2>
+              <span className="cta-section__eyebrow" style={{ color: 'var(--col-gold)' }}>{siteData.aboutCta.eyebrow}</span>
+              <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>{siteData.aboutCta.title}</h2>
               <p className="cta-section__body" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                初回60分は完全無料です。<br />
-                どんな小さなお悩みでも、お気軽にご相談ください。<br />
-                あなたのペースで、一緒に考えましょう。
+                {siteData.aboutCta.body.split('\n').map((line, i, arr) => (
+                  <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                ))}
               </p>
               <div className="cta-section__btns">
                 <Link href="/contact" className="btn btn--primary btn--lg">無料相談を申し込む</Link>

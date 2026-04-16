@@ -32,6 +32,10 @@ export default function AdminSitePage() {
     setData(d => ({ ...d, hero: { ...d.hero, [key]: value } }))
   }
 
+  function updateAboutCta(key: keyof SiteData['aboutCta'], value: string) {
+    setData(d => ({ ...d, aboutCta: { ...d.aboutCta, [key]: value } }))
+  }
+
   function updateWhyCard(i: number, key: 'title' | 'desc', value: string) {
     setData(d => {
       const cards = [...d.whyCards]
@@ -79,6 +83,12 @@ export default function AdminSitePage() {
           <FormField label="強調テキスト（イタリック・中央行）" value={data.hero.titleEmphasis} onChange={v => updateHero('titleEmphasis', v)} />
           <FormField label="タイトル 3行目" value={data.hero.titleLine2} onChange={v => updateHero('titleLine2', v)} />
           <TextareaField label="サブタイトル（改行は↵Enterで反映）" value={data.hero.subtitle} onChange={v => updateHero('subtitle', v)} rows={3} />
+        </Section>
+
+        <Section title="Aboutページ 無料相談CTA">
+          <FormField label="eyebrow（小さい英語テキスト）" value={data.aboutCta.eyebrow} onChange={v => updateAboutCta('eyebrow', v)} />
+          <FormField label="タイトル" value={data.aboutCta.title} onChange={v => updateAboutCta('title', v)} />
+          <TextareaField label="本文（改行は↵Enterで反映）" value={data.aboutCta.body} onChange={v => updateAboutCta('body', v)} rows={4} />
         </Section>
 
         <Section title="選ばれる3つの理由">
