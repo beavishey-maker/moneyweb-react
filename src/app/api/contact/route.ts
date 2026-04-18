@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
   `;
 
   const { error: sendError } = await resend.emails.send({
-    from: 'money web <onboarding@resend.dev>',
+    from: 'money web <noreply@kanako-moneyadvisor.com>',
     to: 'fpkanako1696@gmail.com',
     replyTo: email,
     subject: `【${subjectLabel}】${name} 様より`,
