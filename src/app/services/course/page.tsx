@@ -95,8 +95,6 @@ export default function CoursePage() {
                 '家計簿をつけても、改善につながらない',
                 '将来の不安を漠然と抱えたまま過ごしている',
                 'お金の管理を一から学び直したい',
-                '保険・投資について正しく理解したい',
-                '仕事で家計相談のスキルを活かしたい',
               ].map((text, i) => (
                 <div key={i} style={{
                   background: 'var(--col-neutral)',
