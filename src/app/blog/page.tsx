@@ -113,7 +113,7 @@ export default function BlogPage() {
               <h2 className="cta-section__title" style={{ color: 'rgba(255,255,255,0.95)' }}>記事を読んで、気になったことがあれば</h2>
               <p className="cta-section__body" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 「これって私のこと？」と思ったら、ぜひ相談してください。<br />
-                初回60分は無料です。
+                初回30分のご相談は500円（税込）です。
               </p>
               <div className="cta-section__btns">
                 <Link href="/contact" className="btn btn--primary btn--lg">相談を申し込む</Link>

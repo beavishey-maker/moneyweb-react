@@ -210,7 +210,7 @@ export default function HomePage() {
                 まずは、話してみませんか。
               </h2>
               <p className="cta-section__sub" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                初回30分のご相談です。<br />
+                初回30分500円（税込）のご相談です。<br />
                 オンライン対応なので、全国どこからでもOK。<br />
                 金融商品の勧誘は一切ありません。
               </p>

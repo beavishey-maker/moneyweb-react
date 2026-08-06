@@ -192,14 +192,24 @@ export default function ConsultationPage() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>単発セッション</strong></td>
-                    <td style={{ fontSize: '0.85rem', color: 'var(--col-muted)' }}>60分・1テーマに集中してアドバイス</td>
-                    <td><strong style={{ fontSize: '1.1rem' }}>5,500 円</strong><span style={{ fontSize: '0.8rem', color: 'var(--col-muted)' }}> / 60分</span></td>
+                    <td><strong>初回相談</strong></td>
+                    <td style={{ fontSize: '0.85rem', color: 'var(--col-muted)' }}>30分・現状のヒアリングと方向性のご提案</td>
+                    <td><strong style={{ fontSize: '1.1rem' }}>500 円</strong><span style={{ fontSize: '0.8rem', color: 'var(--col-muted)' }}> / 30分（税込）</span></td>
                   </tr>
                   <tr>
-                    <td><strong>ライフプラン包括コース</strong></td>
+                    <td><strong>延長料金</strong></td>
+                    <td style={{ fontSize: '0.85rem', color: 'var(--col-muted)' }}>初回相談の延長（1時間）</td>
+                    <td><strong style={{ fontSize: '1.1rem' }}>5,500 円</strong><span style={{ fontSize: '0.8rem', color: 'var(--col-muted)' }}> / 60分（税込）</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>2回目以降</strong></td>
+                    <td style={{ fontSize: '0.85rem', color: 'var(--col-muted)' }}>60分・継続セッション</td>
+                    <td><strong style={{ fontSize: '1.1rem' }}>5,500 円</strong><span style={{ fontSize: '0.8rem', color: 'var(--col-muted)' }}> / 60分（税込）</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>ライフプラン包括プラン</strong></td>
                     <td style={{ fontSize: '0.85rem', color: 'var(--col-muted)' }}>キャッシュフロー表作成＋包括的アドバイス＋3回のセッション込み</td>
-                    <td><strong style={{ fontSize: '1.1rem' }}>33,000 円</strong></td>
+                    <td><strong style={{ fontSize: '1.1rem' }}>33,000 円</strong><span style={{ fontSize: '0.8rem', color: 'var(--col-muted)' }}>（税込）</span></td>
                   </tr>
                 </tbody>
               </table>
