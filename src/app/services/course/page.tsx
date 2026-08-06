@@ -140,7 +140,7 @@ export default function CoursePage() {
         {/* カリキュラム */}
         <section className="section">
           <FadeIn>
-            <SectionHeading label="Curriculum" title="カリキュラム" desc="全5回・個別ペースで進行" />
+            <SectionHeading label="Curriculum" title="カリキュラム" desc="最大3回・お客様のペースに合わせて進行" />
           </FadeIn>
           <FadeIn delay={100}>
             <div className="service-flow">
