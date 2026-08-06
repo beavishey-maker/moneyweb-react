@@ -176,7 +176,7 @@ export default function CoursePage() {
                   <li><span style={{ color: 'var(--col-gold)' }}>💻</span><strong>オンライン：</strong>Zoom使用・全国対応</li>
                   <li><span style={{ color: 'var(--col-gold)' }}>🤝</span><strong>対面：</strong>宮城県内・ご指定の場所</li>
                   <li><span style={{ color: 'var(--col-gold)' }}>📅</span><strong>日程：</strong>応相談（柔軟に調整）</li>
-                  <li><span style={{ color: 'var(--col-gold)' }}>👤</span><strong>形式：</strong>マンツーマン指導</li>
+                  <li><span style={{ color: 'var(--col-gold)' }}>👤</span><strong>形式：</strong>個別指導・グループ講座（ご相談ください）</li>
                 </ul>
                 <Link href="/contact" className="btn btn-primary">講座について問い合わせる</Link>
               </div>
