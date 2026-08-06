@@ -116,7 +116,7 @@ export default function BlogPage() {
                 初回60分は無料です。
               </p>
               <div className="cta-section__btns">
-                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を予約する</Link>
+                <Link href="/contact" className="btn btn--primary btn--lg">相談を申し込む</Link>
               </div>
             </FadeIn>
           </div>

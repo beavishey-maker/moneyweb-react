@@ -77,8 +77,8 @@ export default function Header() {
             >
               <Instagram size={20} />
             </a>
-            <Link href="/contact" className="header-cta" aria-label="無料相談を予約する">
-              無料相談
+            <Link href="/contact" className="header-cta" aria-label="相談を申し込む">
+              相談を申し込む
             </Link>
             {isMounted && (
               <button

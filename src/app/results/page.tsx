@@ -166,7 +166,7 @@ export default function ResultsPage() {
                 あなたの「変化」も、必ず起こせます。
               </p>
               <div className="cta-section__btns">
-                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を予約する</Link>
+                <Link href="/contact" className="btn btn--primary btn--lg">相談を申し込む</Link>
               </div>
             </FadeIn>
           </div>

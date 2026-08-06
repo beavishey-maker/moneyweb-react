@@ -31,7 +31,7 @@ export default function HomePage() {
           </p>
           <div className="hero__actions">
             <Link href="/contact" className="btn btn--primary btn--lg">
-              無料相談を申し込む
+              相談を申し込む
               <ArrowRight size={16} />
             </Link>
             <Link href="/services" className="btn btn--outline btn--lg">
@@ -210,12 +210,12 @@ export default function HomePage() {
                 まずは、話してみませんか。
               </h2>
               <p className="cta-section__sub" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                初回30分は完全無料です。<br />
+                初回30分のご相談です。<br />
                 オンライン対応なので、全国どこからでもOK。<br />
                 金融商品の勧誘は一切ありません。
               </p>
               <Link href="/contact" className="btn btn--primary btn--lg">
-                無料相談を申し込む
+                相談を申し込む
                 <ArrowRight size={16} />
               </Link>
               <p className="cta-section__note" style={{ color: 'rgba(255,255,255,0.3)' }}>

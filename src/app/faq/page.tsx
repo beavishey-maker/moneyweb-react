@@ -104,11 +104,11 @@ export default function FaqPage() {
               </h2>
               <p className="cta-section__body" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 疑問や不安はそのまま持ち込んでください。<br />
-                初回30分・完全無料でお話をお聞きします。
+                初回30分でお話をお聞きします。
               </p>
               <div className="cta-section__btns">
                 <Link href="/contact" className="btn btn--primary btn--lg">
-                  無料相談を申し込む
+                  相談を申し込む
                   <ArrowRight size={16} />
                 </Link>
               </div>

@@ -8,7 +8,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: 'money web | お金とキャリアの伴走プランナー',
-  description: '40〜50代女性のお金の不安とキャリアの迷いに、FP×キャリアコンサルタントが伴走します。初回60分無料相談。',
+  description: '40〜50代女性のお金の不安とキャリアの迷いに、FP×キャリアコンサルタントが伴走します。初回60分のご相談受付中。',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

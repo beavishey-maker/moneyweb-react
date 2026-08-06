@@ -91,11 +91,11 @@ export function KineticNavigation({ items, isOpen, onClose }: KineticNavigationP
         {/* フッター */}
         <div className="kinetic-footer">
           <Link href="/contact" className="kinetic-footer__cta" onClick={onClose}>
-            <span>無料相談を予約する</span>
+            <span>相談を申し込む</span>
             <span>→</span>
           </Link>
           <p className="kinetic-footer__info">
-            初回60分無料 / Zoom対応・全国OK<br />
+            初回60分 / Zoom対応・全国OK<br />
             保険商品の勧誘は一切ありません
           </p>
         </div>

@@ -190,7 +190,7 @@ export default function AboutPage() {
                 ))}
               </p>
               <div className="cta-section__btns">
-                <Link href="/contact" className="btn btn--primary btn--lg">無料相談を申し込む</Link>
+                <Link href="/contact" className="btn btn--primary btn--lg">相談を申し込む</Link>
                 <Link href="/services" className="btn btn--outline btn--lg" style={{ color: 'rgba(255,255,255,0.7)', borderColor: 'rgba(255,255,255,0.2)' }}>サービス・料金を見る</Link>
               </div>
             </FadeIn>

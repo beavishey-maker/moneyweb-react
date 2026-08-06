@@ -20,7 +20,7 @@ export default function FloatingCTA() {
       <Link href="/contact" className="floating-cta__btn">
         <div className="floating-cta__pulse" />
         <MessageCircle size={16} />
-        <span>無料相談</span>
+        <span>相談を申し込む</span>
       </Link>
     </div>
   );
