@@ -7,8 +7,12 @@ import ChatWidget from '@/components/chat/ChatWidget';
 import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.kanako-moneyadvisor.com'),
   title: 'money web | お金とキャリアの伴走プランナー',
   description: '40〜50代女性のお金の不安とキャリアの迷いに、FP×キャリアコンサルタントが伴走します。初回60分のご相談受付中。',
+  verification: {
+    google: 'kBD2oCT3jy3lAlKS8FglSNv84J8Fq2n0vv_RdGNsBPM',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
